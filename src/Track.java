@@ -16,9 +16,9 @@ public class Track {
       */
     public Track(){
         nameTrack = "";
-        complexity = NULL;
-        distance = NULL;
-        ExtraComplexities = NULL;
+        complexity = null;
+        distance = null;
+        extraComplexities = null;
     }
     /*
         Initialize the distance (km).Parameterized constructor
@@ -28,7 +28,7 @@ public class Track {
         this.nameTrack = nameTrack;
         this.complexity = complexity;
         this.distance = distance;
-        ExtraComplexities = extraComplexities;
+        this.extraComplexities = extraComplexities;
     }
     /*
        Return the name of the track
