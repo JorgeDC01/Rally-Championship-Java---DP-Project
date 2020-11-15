@@ -6,7 +6,7 @@
 public enum ComplexityTrack {
     LOW(1),
     MEDIUM(1.25),
-    HIGHT(1.5);
+    HIGH(1.5);
 
     private double amountComplexity;
 
@@ -14,12 +14,12 @@ public enum ComplexityTrack {
         Initialize the complexity.Parameterized constructor
         @param v The complexity
      */
-    ComplexityTrack(double v) {
+    ComplexityTrack (double v) {
         this.amountComplexity = v;
     }
 
     /*
-        Return the amountComplexity of LOW, MEDIUM OR HIGHT.
+        Return the amountComplexity of LOW, MEDIUM OR HIGH.
         @return Complexity
      */
     public double getAmount(){
