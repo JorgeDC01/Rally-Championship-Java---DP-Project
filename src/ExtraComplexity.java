@@ -4,10 +4,10 @@
  */
 
 public enum ExtraComplexity {
-    NOCTURNO(1.2,0.8),
-    MOJADO(1.15,0.85),
-    FRIO(1.1,0.9),
-    GRAVILLA(1.05,0.95);
+    NIGHT (1.2,0.8),
+    WET (1.15,0.85),
+    COLD (1.1,0.9),
+    GRAVEL (1.05,0.95);
 
     private  double complexityFactor;
     private  double distanceFactor;
