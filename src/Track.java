@@ -52,4 +52,12 @@ public class Track {
         return this.distance;
     }
 
+    /*
+    Show the information of a track:
+    <circuito: nombre> <cond: nombreCondiciones> <comp: complejidad(original:valor)(actual:valor)> <dist: distancia(original:valor)(actual:valor)> ***
+    No parametres.
+     */
+    public void showTrack(){
+
+    }
 }

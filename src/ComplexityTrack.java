@@ -6,9 +6,9 @@
 public enum ComplexityTrack {
     LOW(1),
     MEDIUM(1.25),
-    HIGHT(1.5);
+    HIGH(1.5);
 
-    private double amountComplexity;
+    private final double amountComplexity;
 
     /*
         Initialize the complexity.Parameterized constructor

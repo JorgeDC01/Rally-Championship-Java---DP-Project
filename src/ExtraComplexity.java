@@ -9,8 +9,8 @@ public enum ExtraComplexity {
     FRIO(1.1,0.9),
     GRAVILLA(1.05,0.95);
 
-    private  double complexityFactor;
-    private  double distanceFactor;
+    private final double complexityFactor;
+    private final double distanceFactor;
     /*
         Initialize the ExtraComplexity. Parameterized constructor.
         @param Factor that have influence in the track's complexity.

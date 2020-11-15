@@ -8,7 +8,7 @@ public enum DistanceTrack {
     INTERMEDIATE(275),
     LONG(300);
 
-    private int distanceTrack;
+    private final int distanceTrack;
     /*
         Initialize the distance (km).Parameterized constructor
         @param distance The length in kilometres
