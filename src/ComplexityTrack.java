@@ -4,17 +4,18 @@
  */
 
 public enum ComplexityTrack {
-    LOW(1),
-    MEDIUM(1.25),
-    HIGH(1.5);
-
-    private double amountComplexity;
+    LOW("LOW",1),
+    MEDIUM("MEDIUM",1.25),
+    HIGH("HIGH",1.5);
+    private final String name;
+    private final double amountComplexity;
 
     /*
-        Initialize the complexity.Parameterized constructor
+        Initialize the complexity with the Name and value (double).Parameterized constructor
         @param v The complexity
      */
-    ComplexityTrack (double v) {
+     ComplexityTrack (String name, double v) {
+         this.name = name;
         this.amountComplexity = v;
     }
 
@@ -22,7 +23,21 @@ public enum ComplexityTrack {
         Return the amountComplexity of LOW, MEDIUM OR HIGH.
         @return Complexity
      */
-    public double getAmount(){
+    public double getAmountComplexity(){
         return this.amountComplexity;
+    }
+    /*
+        Return the name of the complexity between LOW, MEDIUM OR HIGH.
+        @return String of name
+     */
+    public String getName() { return name; }
+
+    /*
+        Override the method toString returning the Name of the complexity and his value.
+        @return String Name + Value of complexity
+     */
+    @Override
+    public String toString() {
+        return getName() + " (original: " + getAmountComplexity()+")";
     }
 }

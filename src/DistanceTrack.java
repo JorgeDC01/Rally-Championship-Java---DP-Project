@@ -4,23 +4,42 @@
  */
 
 public enum DistanceTrack {
-    SHORT(250),
-    INTERMEDIATE(275),
-    LONG(300);
+    SHORT("SHORT",250.0),
+    INTERMEDIATE("INTERMEDIATE",275.0),
+    LONG("LONG",300.0);
 
-    private int distanceTrack;
+    private final String name;
+    private final double distanceTrack;
     /*
         Initialize the distance (km).Parameterized constructor
         @param distance The length in kilometres
      */
-    DistanceTrack(int distance) {
+     DistanceTrack(String name,double distance) {
+
         this.distanceTrack = distance;
+        this.name = name;
     }
     /*
-       Return the distance of LOW, MEDIUM OR HIGHT.
-       @return distance of Track
+        Return the name  LOW, MEDIUM OR HIGH.
+        @return Name of track
+      */
+    public String getName() { return name; }
+
+    /*
+        Return the distance of LOW, MEDIUM OR HIGH.
+        @return distance of Track
      */
-    public int getDistanceTrack() {
+    public double getDistanceTrack() {
         return this.distanceTrack;
     }
+    /*
+        Override the method toString returning the Name of the complexity and his value.
+        @return String Name + Value of complexity
+     */
+    @Override
+    public String toString() {
+        return getName() + " (original: " + getDistanceTrack()+")";
+    }
+
+
 }
