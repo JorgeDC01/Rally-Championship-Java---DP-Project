@@ -33,7 +33,7 @@ public class Track {
     }
     /*
         Set the name of the track on NameTrack
-        @param String name of track
+        @param name The name of the track(String)
      */
     public void setNameTrack (String name) {
         this.nameTrack = name;

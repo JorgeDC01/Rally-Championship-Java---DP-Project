@@ -1,6 +1,7 @@
 /*
-    Representation of all kind of valid distance about a track.
-    @author Jorge del Castillo Gomez and Raul Hormigo Ceron.
+    Representation of all kind of valid distance about a track. The enum include
+    a String name and float distanceTrack
+    @author Jorge del Castillo Gomez
  */
 
 public enum DistanceTrack {

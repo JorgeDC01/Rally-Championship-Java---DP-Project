@@ -1,6 +1,6 @@
 /*
     Representation of all kind of valid distance about a track.
-    @author Jorge del Castillo Gomez and Raul Hormigo Ceron.
+    @author Jorge del Castillo Gomez
  */
 
 public enum ExtraComplexity {

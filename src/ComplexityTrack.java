@@ -1,6 +1,6 @@
 /*
     Representation of all kind of valid complexity about a track.
-    @author Jorge del Castillo Gomez and Raul Hormigo Ceron.
+    @author Jorge del Castillo Gomez
  */
 
 public enum ComplexityTrack {
@@ -12,7 +12,7 @@ public enum ComplexityTrack {
 
     /*
         Initialize the complexity with the Name and value (double).Parameterized constructor
-        @param v The complexity
+        @param v The complexity. name The name of the track's complexity
      */
      ComplexityTrack (String name, double v) {
          this.name = name;
