@@ -1,24 +1,15 @@
-import java.util.Comparator;
+
 
 public class test {
     public static void main (String [ ] args) {
 
         ITrack t1,t2,t3,t4,t5,t6;
         t1 = new Track("PORTUGAL", ComplexityTrack.MEDIUM, DistanceTrack.INTERMEDIATE);
-        t1 = new GravillaDecorator(t1);
-        System.out.println(t1.getComplexity());
-        t1.showTrack(t1.getExtras());
+        t1 = new GravelDecorator(t1);
+        t1 = new NightDecorator(t1);
+        System.out.println(t1);
 
-        t1 = new NocturnoDecorator(t1);
         t2 = new Track("AUSTRALIA", ComplexityTrack.LOW, DistanceTrack.LONG);
-
-        System.out.println(t1.getComplexity());
-        //t1.showTrack();
-        //t2.showTrack();
-
-     //   a.setExtraComplexities(ExtraComplexity.GRAVEL);
-     //  a.setExtraComplexities(ExtraComplexity.NIGHT);
-     //  a.showTrack();
 
         Team T1 = new Team("citroen",true,true);
         T1.addPilot(new ExperiencedPilot("Loeb",null,Concentration.NORMAL));

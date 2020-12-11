@@ -1,8 +1,9 @@
 /*
-    The class track represents the tracks where pilots will take part with their
+    The class track represents the basic tracks (WITHOUT EXTRA COMPLEXITIES) where pilots will take part with their
     respective cars. The difference btw tracks are the complexity and distance to
     go down the track. This two settings will have influence in the efficiency of
-    the pilot.
+    the pilot. This class implements the ITrack interface with the methods getComplexity,
+    getDistance, getNoumExtras, getOriginalComplexity, getOriginalDistance and getNameTrack.
     @author: Jorge del Castillo Gómez
  */
 public class Track implements ITrack{
@@ -41,45 +42,49 @@ public class Track implements ITrack{
         this.originalComplexity = complexity;
     }
     /*
+        Get the complexity of the track (name and value)
+        @return The complexity of the track as a Complexity
+     */
+    public ComplexityTrack getOriginalComplexity(){ return originalComplexity; }
+    /*
         Set the distance of the track on distance
-        @param DistanceTrack distance of track as parameter
+        @param The  DistanceTrack of track as parameter
      */
     public void setOriginalDistance(DistanceTrack distance){
         this.originalDistance = distance;
     }
     /*
-        Show in console the track's information (Name, Original and current Complexity, Original and current Distance
-        It hasn't got parameters.
+        Get the Distance of track (name and distance in km)
+        @return the distance of a track as a DistanceTrack
      */
-
-    public void showTrack(String extra){
-        System.out.println( "Track's name: " + nameTrack + ", cond: " + extra + ", Complexity: " + originalComplexity.toString() +", actual: " + getComplexity() + ", Distance: " + originalDistance.toString() + ", actual: " + getDistance());
-    }
-    /*
-        Get  the distance of a track in km
-        @return the distance of a track as a Double
-     */
-    public double getOriginalDistance(){ return this.originalDistance.getDistanceTrack(); }
-    /*
-        Get the complexity of the track.
-        @return The complexity of the track as a Double
-     */
-    public double getOriginalComplexity(){ return originalComplexity.getAmountComplexity(); }
+    public DistanceTrack getOriginalDistance(){ return this.originalDistance; }
     /*
         Get the real complexity of the track
         @return Complexity as a Double
      */
     public double getComplexity(){
-        return getOriginalComplexity();
+        return getOriginalComplexity().getAmountComplexity();
     }
     /*
         Get the real distance of the track
         @return The distance as a Double
      */
     public double getDistance(){
-        return getOriginalDistance();
+        return getOriginalDistance().getDistanceTrack();
     }
-    public String getExtras(){
-        return " ";
+    /*
+        Get " " as a extra complexity of a default track (without extra complexities)
+        @return String nothing
+     */
+    public String getNoumExtras(){
+        return "";
+    }
+    /*
+       Override the method toString of collection.
+       @return The output of a track as a String
+    */
+    @Override
+    public String toString(){
+        return "Track's name: " + getNameTrack() + ", cond: " + getNoumExtras() + ", Complexity: " + getOriginalComplexity() + ", actual: " + getComplexity() + ", Distance: " + getOriginalDistance() + ", actual: " + getDistance();
     }
 }
