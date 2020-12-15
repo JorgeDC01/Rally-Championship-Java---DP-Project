@@ -1,5 +1,5 @@
 /*
-    The interface of a Track and the decorator. This interface will declare the comom methods
+    The interface of a Track and the decorator. This interface will declare the comon methods
     that will be used at decorator and at track.
     @author: Jorge del Castillo Gómez
  */
