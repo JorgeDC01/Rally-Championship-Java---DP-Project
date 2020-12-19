@@ -70,7 +70,7 @@ public class FastCar extends NormalCar {
         if (this == obj) {
             return true; //Both refer to the same car
         }
-        if (!(obj instanceof Car)) {
+        if (!(obj instanceof ICar)) {
             return false; //They have different types
         }
         FastCar other = (FastCar) obj; // We do casting bs the compiler doesn't know

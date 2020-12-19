@@ -1,7 +1,7 @@
 /*
     The interface of a Car with his methods.
  */
-public interface Car {
+public interface ICar {
     String getNameCar();
     Speed getSpeedCar();
     Fuel getInitialFuel();

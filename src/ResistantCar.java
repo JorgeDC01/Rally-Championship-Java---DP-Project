@@ -65,7 +65,7 @@ public class ResistantCar extends NormalCar{
         if (this == obj) {
             return true; //Both refer to the same car
         }
-        if (!(obj instanceof Car)) {
+        if (!(obj instanceof ICar)) {
             return false; //They have different types
         }
         ResistantCar other = (ResistantCar) obj;

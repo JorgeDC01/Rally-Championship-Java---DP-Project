@@ -4,7 +4,7 @@
     in the pilot's efficiency and the car. This class implements the interface of Car.
     @author Jorge del Castillo Gomez
  */
-public class NormalCar implements Car{
+public class NormalCar implements ICar{
     String nameCar;
     Speed speedCar;
     Fuel initialFuel;
@@ -80,7 +80,7 @@ public class NormalCar implements Car{
         if (this == obj) {
             return true; //Both refer to the same car
         }
-        if (!(obj instanceof Car)) {
+        if (!(obj instanceof ICar)) {
             return false; //They have different types
         }
         NormalCar other = (NormalCar) obj;

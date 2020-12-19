@@ -9,7 +9,7 @@ public class ExperiencedPilot extends Pilot {
         which is protected.
         @param Name of the pilot as a String, The car assigned as a Car, The concentration as Concentration
      */
-    protected ExperiencedPilot(String namePilot, Car carPilot, Concentration concentration) {
+    protected ExperiencedPilot(String namePilot, ICar carPilot, Concentration concentration) {
         super(namePilot, carPilot, concentration);
     }
     /*

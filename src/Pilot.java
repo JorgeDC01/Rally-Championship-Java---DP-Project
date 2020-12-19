@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public abstract class Pilot {
+public abstract class Pilot implements IPilot {
     private String namePilot;
-    private Car carPilot;
+    private ICar carPilot;
     private Concentration concentration;
     // Map as a collection to store all the results from a pilot with the name of the track
     // as a key.
@@ -19,7 +19,7 @@ public abstract class Pilot {
         @param The name of the pilot, The car that will be driven by the pilot, The concentration
         and if he is qualified to stay on the championship.
      */
-    protected Pilot(String namePilot, Car carPilot, Concentration concentration) {
+    protected Pilot(String namePilot, ICar carPilot, Concentration concentration) {
         this.namePilot = namePilot;
         this.carPilot = carPilot;
         this.concentration = concentration;
@@ -47,7 +47,7 @@ public abstract class Pilot {
        Get the Car of the Pilot.
        @return The Car of the Pilot as a Car
     */
-    public Car getCarPilot() {
+    public ICar getCarPilot() {
         return carPilot;
     }
 
@@ -55,7 +55,7 @@ public abstract class Pilot {
         Set the Car of the pilot.
         @param The car of the Pilot as a Car
      */
-    public void setCarPilot(Car carPilot) {
+    public void setCarPilot(ICar carPilot) {
         this.carPilot = carPilot;
     }
 

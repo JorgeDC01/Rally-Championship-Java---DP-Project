@@ -8,18 +8,18 @@ public class Team {
 
     private String nameTeam;
     //A List, the dinamic type is a ArrayList
-    private List<Pilot> pilotsTeam;
-    private  List<Car> carsTeam;
+    private List<IPilot> pilotsTeam;
+    private  List<ICar> carsTeam;
     //field that stores a strategy 's comparator
-    Comparator<Pilot> comparatorPilots;
-    Comparator<Car> comparatorCars;
+    Comparator<IPilot> comparatorPilots;
+    Comparator<ICar> comparatorCars;
     private boolean ascOrDescPilots;
     private boolean ascOrDescCars;
 
     public Team(String nameTeam,boolean ascOrDescPilots, boolean ascOrDescCars) {
         this.nameTeam = nameTeam;
-        this.pilotsTeam = new ArrayList<Pilot>();
-        this.carsTeam = new ArrayList<Car>();
+        this.pilotsTeam = new ArrayList<IPilot>();
+        this.carsTeam = new ArrayList<ICar>();
         this.ascOrDescPilots = ascOrDescPilots;
         this.ascOrDescCars = ascOrDescCars;
     }
@@ -38,22 +38,22 @@ public class Team {
         Get the pilots of the Team
         @return The pilots of a team as a List
      */
-    public List<Pilot> getPilotsTeam() { return pilotsTeam; }
+    public List<IPilot> getPilotsTeam() { return pilotsTeam; }
     /*
         Set the pilots of the team
         @param The List of pilots to set into the team.
     */
-    public void setPilotsTeam(List<Pilot> pilotsTeam) { this.pilotsTeam = pilotsTeam; }
+    public void setPilotsTeam(List<IPilot> pilotsTeam) { this.pilotsTeam = pilotsTeam; }
     /*
         Get the cars of the team
         @return The cars of the team as a List
     */
-    public List<Car> getCarsTeam() { return carsTeam; }
+    public List<ICar> getCarsTeam() { return carsTeam; }
     /*
         Set the cars of the team
         @param The List of cars that the team will have.
     */
-    public void setCarsTeam(List<Car> carsTeam) { this.carsTeam = carsTeam; }
+    public void setCarsTeam(List<ICar> carsTeam) { this.carsTeam = carsTeam; }
     /*
       Get if the collection of pilots will be sorted in a ascendant way or descendant way
       @return The direction of sorting as a Boolean.
@@ -78,12 +78,12 @@ public class Team {
         Set the Strategy comparator of the Pilots.
         @param The Comparator for The list of pilots
     */
-    public void setComparatorPilots(Comparator<Pilot> comp){this.comparatorPilots = comp;}
+    public void setComparatorPilots(Comparator<IPilot> comp){this.comparatorPilots = comp;}
     /*
         Set the Strategy comparator of the Pilots
         @param The Comparator for the List of pilots.
      */
-    public void setComparatorCars(Comparator<Car> comp){this.comparatorCars = comp;}
+    public void setComparatorCars(Comparator<ICar> comp){this.comparatorCars = comp;}
     /*
         Sort the collection of Pilots of a Team
         @param A boolean that represents the direction of the ranking
@@ -116,7 +116,7 @@ public class Team {
         Show all Pilots that the Team has in console
      */
     public void showPilotsOfTeam(){
-        Iterator<Pilot> it = getPilotsTeam().iterator();
+        Iterator<IPilot> it = getPilotsTeam().iterator();
         while(it.hasNext()){
             System.out.println(it.next());
         }
@@ -125,7 +125,7 @@ public class Team {
         Show all Cars that the Team has in console
      */
     public void showCarsOfTeam(){
-        Iterator<Car> it = getCarsTeam().iterator();
+        Iterator<ICar> it = getCarsTeam().iterator();
         while(it.hasNext()){
             System.out.println(it.next());
         }
@@ -139,5 +139,5 @@ public class Team {
         Insert the car given into de Collection of Cars
         @param The Car which will be competing with the team by a pilot
      */
-    public void addCar(Car car){getCarsTeam().add(car);}
+    public void addCar(ICar car){getCarsTeam().add(car);}
 }
