@@ -8,7 +8,8 @@ public enum Concentration {
     private final double concentrationPilot;
     /*
         Initialize a Concentration with his name and his amount. Parameterized constructor
-        @param The name as a String and The amount of concentration as a int
+        @param name The name of the concentration.
+        @param concentration The amount of concentration related with the name.
     */
     Concentration(String name,int concentration) {
         this.name = name;

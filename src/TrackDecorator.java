@@ -7,44 +7,44 @@ public abstract class TrackDecorator implements ITrack{
     protected ITrack track;
     /*
         The decorator will have the last track that can be decorated or not.
-        @param The track
+        @param track The track that is referenced by this new layer.
      */
     public TrackDecorator(ITrack track){
         this.track = track;
     }
     /*
-        Get the complexity of the track
-        @return The complexity as a Double
+        Get the complexity of the track.
+        @return The complexity as a Double.
      */
     public double getComplexity(){ return this.track.getComplexity(); }
     /*
-        Get the distance of the track
-        @return The distance as a Double
+        Get the distance of the track.
+        @return The distance as a Double.
      */
     public double getDistance(){ return this.track.getDistance(); }
     /*
-        Get the extras complexities of the field track
-        @return The extra complexities as a String
+        Get the extras complexities of the field track.
+        @return The extra complexities as a String.
      */
     public String getNoumExtras(){ return this.track.getNoumExtras(); }
     /*
-       Return the name of the track
-       @return Name of the track
+       Return the name of the track.
+       @return Name of the track.
     */
     public String getNameTrack(){ return this.track.getNameTrack(); }
     /*
-        Get  the distance of a track in km
-        @return the distance of a track as a Double
+        Get  the distance of a track in km.
+        @return the distance of a track as a Double.
      */
     public DistanceTrack getOriginalDistance(){ return this.track.getOriginalDistance(); }
     /*
-        Get the complexity of the track.
-        @return The complexity of the track as a Double
+        Get the complexity of the track..
+        @return The complexity of the track as a Double.
      */
     public ComplexityTrack getOriginalComplexity(){ return this.track.getOriginalComplexity(); }
     /*
         Override the method toString of collection.
-        @return The output of a track as a String
+        @return The output of a track as a String.
     */
     @Override
     public String toString() {

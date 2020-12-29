@@ -40,8 +40,9 @@ public class NormalCar implements ICar{
     /*
         Calculate the real speed of a car given the skill from de pilot who drives it
         and the complexity of the track where the car is running.
-        @param skills The pilot's skills as a float. complexity The track's complexity as a double
-        @return double the real speed of a car as a Float
+        @param skills The pilot's skills.
+        @param complexity The track's complexity.
+        @return double the real speed of a car as a Float.
     */
     public double getRealSpeed(double skills,double complexity){
         return (getSpeedCar().getSpeed() * skills)/complexity;
@@ -49,7 +50,8 @@ public class NormalCar implements ICar{
     /*
         Calculate the time (minutes) needed to finish a race by a specific pilot in a
         specific track.
-        @param distance The distance of the track. realSpeed The car's realSpeed.
+        @param distance The distance of the track.
+        @param realSpeed The car's realSpeed.
         @return a Double. The time needed to finish a race.
     */
     public double getTimeRace(double distance,double realSpeed){
@@ -73,6 +75,7 @@ public class NormalCar implements ICar{
     }
     /*
         Override the equals method to compare if two cars are identical(with their fields)
+        @param obj The obj that will be compared to the first one if both are equals.
         @return True if both cars are identical, and False if they aren't identical
      */
     @Override
@@ -99,5 +102,12 @@ public class NormalCar implements ICar{
         result = 11*result + ((getInitialFuel() == null) ? 0 : getInitialFuel().getName().hashCode());
         result = (int) (19*result + getFuelLeftOver());
         return result;
+    }
+    /*
+        This method return True if the car has fuel and false if not.
+        @return Boolean: True if the car has fuel and false in the other case.
+     */
+    public boolean hasFuelCar(){
+        return getFuelLeftOver() > 0;
     }
 }

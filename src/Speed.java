@@ -12,11 +12,14 @@ public enum Speed {
 
     private final String name;
     private final double amountSpeed;
-
+    /*
+        Parameterized constructor.
+        @param name The name of the speed.
+        @param speed The amount of speed related with his name.
+     */
     Speed(String name,double speed) {
     this.name = name;
     this.amountSpeed = speed;}
-
     /*
         Return the speed of a car between TURTLE,SLOW,NORMAL,FAST AND CHEETAH
         @return A float theory Speed of a car

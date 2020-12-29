@@ -14,9 +14,9 @@ public enum DistanceTrack {
     /*
         Initialize the distance (km).Parameterized constructor
         @param distance The length in kilometres
+        @param name The name of the distance
      */
      DistanceTrack(String name,double distance) {
-
         this.distanceTrack = distance;
         this.name = name;
     }
@@ -41,6 +41,4 @@ public enum DistanceTrack {
     public String toString() {
         return getName() + " (original: " + getDistanceTrack()+")";
     }
-
-
 }

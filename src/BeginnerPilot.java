@@ -7,7 +7,9 @@ public class BeginnerPilot extends Pilot {
     /*
         Initialize the beginner pilot. This Parameterized constructor calls the super constructor
         which is protected.
-        @param Name of the pilot as a String, The car assigned as a Car, The concentration as Concentration
+        @param namePilot The name of the pilot as a String
+        @param carPilot The car assigned as a Car
+        @param concentration The concentration of the pilot.
      */
     protected BeginnerPilot(String namePilot, ICar carPilot, Concentration concentration) {
         super(namePilot, carPilot, concentration);

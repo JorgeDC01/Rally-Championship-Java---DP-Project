@@ -12,7 +12,8 @@ public enum ComplexityTrack {
 
     /*
         Initialize the complexity with the Name and value (double).Parameterized constructor
-        @param v The complexity. name The name of the track's complexity
+        @param name The name of the complexity
+        @param v The difficulty of the complexity.
      */
      ComplexityTrack (String name, double v) {
          this.name = name;

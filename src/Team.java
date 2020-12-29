@@ -16,77 +16,84 @@ public class Team {
     private boolean ascOrDescPilots;
     private boolean ascOrDescCars;
 
-    public Team(String nameTeam,boolean ascOrDescPilots, boolean ascOrDescCars) {
+    /*
+        Parameterized constructor of a team.
+        @param nameTeam The name of the team
+        @param ascOrDescPilots The direction to order the collection of pilots.
+        @param ascOrDescCars The direction to order the collection of cars.
+     */
+    public Team(String nameTeam,boolean ascOrDescPilots, boolean ascOrDescCars, Comparator<IPilot> compPilots,Comparator<ICar> compCars) {
         this.nameTeam = nameTeam;
         this.pilotsTeam = new ArrayList<IPilot>();
         this.carsTeam = new ArrayList<ICar>();
         this.ascOrDescPilots = ascOrDescPilots;
         this.ascOrDescCars = ascOrDescCars;
-    }
+        this.comparatorPilots = compPilots;
+        this.comparatorCars = compCars;
 
+    }
     /*
         Get the name of the team
         @return The name of the team
-     */
+    */
     public String getNameTeam() { return nameTeam; }
     /*
-        Set the name of the team
-        @param The name of the team as a String
-     */
+        Set the name of the team.
+        @param nameTeam The name of the team.
+    */
     public void setNameTeam(String nameTeam) { this.nameTeam = nameTeam; }
     /*
-        Get the pilots of the Team
-        @return The pilots of a team as a List
-     */
+        Get the pilots of the Team.
+        @return The pilots of a team.
+    */
     public List<IPilot> getPilotsTeam() { return pilotsTeam; }
     /*
-        Set the pilots of the team
-        @param The List of pilots to set into the team.
+        Set the pilots of the team.
+        @param pilotsTeam The List of pilots to set into the team.
     */
     public void setPilotsTeam(List<IPilot> pilotsTeam) { this.pilotsTeam = pilotsTeam; }
     /*
-        Get the cars of the team
-        @return The cars of the team as a List
+        Get the cars of the team.
+        @return The cars of the team as a List.
     */
     public List<ICar> getCarsTeam() { return carsTeam; }
     /*
-        Set the cars of the team
-        @param The List of cars that the team will have.
+        Set the cars of the team.
+        @param carsTeam The List of cars that the team will have.
     */
     public void setCarsTeam(List<ICar> carsTeam) { this.carsTeam = carsTeam; }
     /*
-      Get if the collection of pilots will be sorted in a ascendant way or descendant way
-      @return The direction of sorting as a Boolean.
+      Get if the collection of pilots will be sorted in a ascendant way or descendant way.
+      @return The direction of sorting.
     */
     public boolean getAscOrDescPilots(){return this.ascOrDescPilots;}
     /*
         Set the direction of the ranking.
-        @param Direction as a Boolean: 1 if its ascending and 0 if it is descending
+        @param ascOrDescPilots The Direction as a Boolean: 1 if its ascending and 0 if it is descending.
     */
     public void setAscOrDescPilots(boolean ascOrDescPilots) { this.ascOrDescPilots = ascOrDescPilots;}
     /*
         Get the direction of the ranking.
-        @return The direction of sorting as a Boolean: TRUE if its sorted ascendant and FALSE if its sorted descendant
+        @return The direction of sorting as a Boolean: TRUE if its sorted ascendant and FALSE if its sorted in descendant way.
      */
     public boolean getAscOrDescCars() { return ascOrDescCars; }
     /*
-        Set the direction of the ranking. TRUE: ASCENDANT. FALSE: DESCENDANT
-        @param The direction as a Boolean.
+        Set the direction of the ranking. TRUE: ASCENDANT. FALSE: DESCENDANT.
+        @param ascOrDescCars The direction.
      */
     public void setAscOrDescCars(boolean ascOrDescCars) { this.ascOrDescCars = ascOrDescCars; }
     /*
         Set the Strategy comparator of the Pilots.
-        @param The Comparator for The list of pilots
+        @param comp The Comparator for The list of pilots.
     */
     public void setComparatorPilots(Comparator<IPilot> comp){this.comparatorPilots = comp;}
     /*
-        Set the Strategy comparator of the Pilots
-        @param The Comparator for the List of pilots.
+        Set the Strategy comparator of the Pilots.
+        @param comp The Comparator for the List of pilots.
      */
     public void setComparatorCars(Comparator<ICar> comp){this.comparatorCars = comp;}
     /*
-        Sort the collection of Pilots of a Team
-        @param A boolean that represents the direction of the ranking
+        Sort the collection of Pilots of a Team.
     */
     public void sortPilots(){
         //1 = ASCENDANT
@@ -99,8 +106,7 @@ public class Team {
         }
     }
     /*
-        Sort the collection of Pilots of a Team
-        @param A boolean that represents the direction of the ranking
+        Sort the collection of Pilots of a Team.
     */
     public void sortCars(){
         //1 = ASCENDANT
@@ -113,7 +119,7 @@ public class Team {
         }
     }
     /*
-        Show all Pilots that the Team has in console
+        Show all Pilots that the Team has in console.
      */
     public void showPilotsOfTeam(){
         Iterator<IPilot> it = getPilotsTeam().iterator();
@@ -122,7 +128,7 @@ public class Team {
         }
     }
     /*
-        Show all Cars that the Team has in console
+        Show all Cars that the Team has in console.
      */
     public void showCarsOfTeam(){
         Iterator<ICar> it = getCarsTeam().iterator();
@@ -131,13 +137,104 @@ public class Team {
         }
     }
     /*
-        Insert the pilot given into the Collection of pilots
-        @param The pilot who will be competing with the team
+        Insert the pilot given into the Collection of pilots.
+        @param pilot The pilot who will be competing with the team.
      */
     public void addPilot(Pilot pilot){this.getPilotsTeam().add(pilot);}
     /*
-        Insert the car given into de Collection of Cars
-        @param The Car which will be competing with the team by a pilot
+        Insert the car given into de Collection of Cars.
+        @param car The Car which will be competing with the team by a pilot.
      */
     public void addCar(ICar car){getCarsTeam().add(car);}
+    /*
+        Get information about all pilot's results of the team and println them
+        in console.
+        @return The total points scored by the pilots of a team.
+     */
+    public int getTeamPoints(){
+        Iterator<IPilot> it = pilotsTeam.iterator();
+        int points = 0;
+        while(it.hasNext()){
+            points=+ it.next().totalPointsStored();
+        }
+        return points;
+    }
+    /*
+        The team registers in the Championship with the Organization.
+     */
+    public void registerTeam(){
+        Organization.getInstance().registeredTeam(this);
+    }
+    /*
+        Override the method hashCode because The organization will collect all teams registered in a Set,
+        So it's needed the hashcode to work with the HashSet.
+     */
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 7 * result + getNameTeam().hashCode();
+        result = 13 * result + getPilotsTeam().hashCode();
+        result = 11 * result + getCarsTeam().hashCode();
+        result = 5 * result + getTeamPoints();
+        return result;
+    }
+    /*
+        Override the method equals to be used with the collection of teams in the Organization as a HashCode.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; //Both refer to the same car
+        }
+        if (!(obj instanceof Pilot)) {
+            return false; //They have different types
+        }
+        Team other = (Team) obj;
+        return  getNameTeam().equals(other.getNameTeam()) && getAscOrDescCars() == other.getAscOrDescCars() &&
+                getAscOrDescPilots() == getAscOrDescPilots();
+    }
+    /*
+        Override the method toString.
+        @return The output of a team in console.
+     */
+    @Override
+    public String toString() {
+        String output = "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n" +
+                "%%%" + getNameTeam() + "%%%" + "\n";
+        for(int i = 0; i < getPilotsTeam().size(); i++){
+            output = output + getPilotsTeam().get(i).toString() + "\n";
+        }
+        for(int i = 0; i < getCarsTeam().size(); i++){
+            output = output + getCarsTeam().get(i).toString() + "\n";
+        }
+        output = output + "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
+        return output;
+    }
+    /*
+        Send a list of all the pilots available of a team to the Organization. If the pilot doesn't have a car,
+        shows in console a message.
+        @return The list of pilots who have a car assigned.
+     */
+    public List<IPilot> sendPilotsTeam(){
+        Iterator <IPilot> itPilot = getPilotsTeam().iterator();
+        Iterator <ICar> itCar = getCarsTeam().iterator();
+        IPilot p;
+        ICar c;
+        List<IPilot> list = new ArrayList<IPilot>();
+        while(itPilot.hasNext()){
+            boolean noCarFound = true;
+            p = itPilot.next();
+            // return the pilot with a car assigned or within it.
+            while(itCar.hasNext() && !p.getDisqualifyPilot() && noCarFound){
+                c = itCar.next();
+                if(c.hasFuelCar()){
+                    p.setCarPilot(c);
+                    noCarFound = false;
+                    list.add(p);
+                }
+            }
+            p.canCompetePilot();
+        }
+        return list;
+    }
 }

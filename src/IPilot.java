@@ -9,9 +9,11 @@ public interface IPilot {
     void setCarPilot(ICar carPilot);
     Concentration getConcentration();
     void setConcentration(Concentration concentration);
-    void isDisqualifyPilot();
+    void isDisqualifyPilot(int neglect);
     void setDisqualifyPilot(boolean disqualifyPilot);
     boolean getDisqualifyPilot();
+    int getNumbersGiveUp();
+    void incrementNumbersGiveUp(int neglect);
     Map<String, Result> getResults();
     void setResults(Map<String, Result> results);
     void specificResultTrack(String track);
@@ -19,10 +21,10 @@ public interface IPilot {
     int numberRacesCompeted();
     boolean canCompetePilot();
     double calculateSkills();
-    void funcionalidadPilot(Track track);
-    boolean isConcentrationEnough(Track track);
-    boolean isFuelEnough(Track track);
-    double minutesToFinishRace(Track track);
-    void storeResult(Track track,double time);
+    void drivePilot(ITrack track);
+    boolean isConcentrationEnough(ITrack track);
+    boolean isFuelEnough(ITrack track);
+    double minutesToFinishRace(ITrack track);
+    void storeResult(ITrack track,double time);
     void reduceFuelOfCar(double minutesRunning);
 }

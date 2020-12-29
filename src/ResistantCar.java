@@ -9,14 +9,16 @@ public class ResistantCar extends NormalCar{
     /*
         Parameterized Constructor. Initialize the name of the car, his theory speed and fuel calling
         the constructor from the superclass Car.
-        @param The nameCar The name of the car. speed The theory speed. fuel The original fuel
+        @param nameCar The name of the car.
+        @param speed The theory speed.
+        @param fuel The original fuel.
      */
     public ResistantCar(String nameCar, Speed speed, Fuel fuel) {
         super(nameCar, speed, fuel);
     }
     /*
         Set the extraFuel to an amount of fuel.
-        @param The extraFuel is the fuel added as a double
+        @param  extraFuel The extraFuel is the fuel added.
      */
     public void setExtraFuel(double extraFuel) { this.extraFuel = extraFuel;}
     /*
@@ -29,7 +31,7 @@ public class ResistantCar extends NormalCar{
         If the car has extraFuel and minutesCompeted > car's fuel -> increase the amount of fuel and update
         the extraFuel to 0 (no more extra)
         In the rest of cases, apply the reduction of fuel like a traditional car.
-        @param The minutesCompeted The minutes competed by a car to reduce the fuel as a Double.
+        @param minutesCompeted The minutes competed by a car to reduce the fuel as a Double.
      */
     @Override
     public void reduceFuel(double minutesCompeted) {
@@ -43,22 +45,23 @@ public class ResistantCar extends NormalCar{
     }
     /*
         Increase the fuel of the ResistantCar adding an increase.
-        @param The increase that will be added to the fuel of a resistant car as a Double
+        @param increase The increase that will be added to the fuel of a resistant car as a Double.
      */
     public void increaseFuelLeftOver(double increase){
         this.fuelLeftOver += increase;}
 
     /*
-   Override the method toString returning the Name, Speed, initial fuel, and fuelLeftOver from a car
-   @return The information of a fast Car
+        Override the method toString returning the Name, Speed, initial fuel, and fuelLeftOver from a car.
+        @return The information of a fast Car.
     */
     @Override
     public String toString() {
         return "Car's name: " + getNameCar() + ", Type: ResistantCar, " + speedCar.toString() + ", "+ initialFuel.toString() + "(Current:" + getFuelLeftOver() + "), " + "reserve: " + getExtraFuel();
     }
     /*
-        Override the equals method to compare if two ResistantCars are identical(with their fields)
-        @return True if both cars are identical, and False if they aren't identical
+        Override the equals method to compare if two ResistantCars are identical(with their fields).
+        @param obj The obj that will be compared if both are equals.
+        @return True if both cars are identical, and False if they aren't identical.
      */
     @Override
     public boolean equals(Object obj) {

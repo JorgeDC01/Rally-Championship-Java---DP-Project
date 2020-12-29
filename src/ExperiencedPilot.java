@@ -5,17 +5,18 @@
  */
 public class ExperiencedPilot extends Pilot {
     /*
-        Initialize the beginner pilot. This Parameterized constructor calls the super constructor
-        which is protected.
-        @param Name of the pilot as a String, The car assigned as a Car, The concentration as Concentration
+        Initialize the experienced pilot. This Parameterized constructor calls the super constructor which is protected.
+        @param namePilot The name of the experienced pilot as a String
+        @param carPilot The car assigned to a experienced pilot
+        @param concentration The concentration of the experienced pilot
      */
     protected ExperiencedPilot(String namePilot, ICar carPilot, Concentration concentration) {
         super(namePilot, carPilot, concentration);
     }
     /*
-        This method is override from Pilot. Calculate the skills of the pilot with
+        This method is override from Pilot. Calculate the skills of the experienced pilot with
         specific constant.
-        @return The skills of a pilot as a Double
+        @return The skills of a experienced pilot as a Double
     */
     @Override
     public double calculateSkills() {
@@ -24,7 +25,7 @@ public class ExperiencedPilot extends Pilot {
     }
     /*
        Override the toString method
-       @return The output of a pilot as a String
+       @return The output of a experienced pilot as a String
     */
     @Override
     public String toString() {

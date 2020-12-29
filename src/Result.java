@@ -14,8 +14,9 @@ public class Result {
         points = 0;
     }
     /*
-        Initialize the result of a pilot. Parameterized Constructor
-        @param The time competed in a race by a pilot as a Float, and The points earned as a int
+        Initialize the result of a pilot. Parameterized Constructor.
+        @param time The time competed in a race by a pilot.
+        @param points The points earned as a int.
      */
     public Result(double time,int points){
         this.time = time;
@@ -24,35 +25,35 @@ public class Result {
 
     /*
         Get the time competed by a pilot in a race.
-        @return The time competed by a pilot as a Float
+        @return The time competed by a pilot as a Float.
      */
     public double getTime() { return time; }
     /*
-        Set the pilot's time competed in a race
-        @param The time as a Float
+        Set the pilot's time competed in a race.
+        @param time The time of the result done by a pilot.
      */
     public void setTime(double time) { this.time = time; }
     /*
         Get the points earned by a pilot in a race.
-        @return The points got by a pilot as a Int
+        @return The points got by a pilot.
      */
     public int getPoints() { return points; }
     /*
-        Set the pilot's points got in a race
-        @param The points as a Int
+        Set the pilot's points got in a race.
+        @param points The points of the result.
      */
     public void setPoints(int points) { this.points = points; }
     /*
         Override the method toString of the interface Object.
-        @return The information of pilot's result in a track as as String
+        @return The information of pilot's result in a track as as String.
      */
     @Override
     public String toString() {
         return "Time: " + getTime() + " minutes - " + "Points: " + getPoints() + " @@@";
     }
     /*
-        Override the method hashCode of the interface Object
-        @return The code of a result as a Int
+        Override the method hashCode of the interface Object.
+        @return The code of a result as a Int.
      */
     @Override
     public int hashCode() {
@@ -62,8 +63,9 @@ public class Result {
        return result;
     }
     /*
-        Override the method equals of the interface Object
-        @return True if both results are identical, in the other case False
+        Override the method equals of the interface Object.
+        @param obj The obj that will be compared if both are equals.
+        @return True if both results are identical, in the other case False.
      */
     @Override
     public boolean equals(Object obj) {

@@ -13,6 +13,11 @@ public enum Fuel {
     private final String name;
     private final double amountFuel;
 
+    /*
+        Parameterized constructor of the fuel.
+        @param name The name of the kind of fuel
+        @param amountFuel The amount of fuel related with his name.
+     */
     Fuel(String name, double amountFuel) {
         this.name = name;
         this.amountFuel = amountFuel;

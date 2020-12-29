@@ -9,15 +9,17 @@ public class FastCar extends NormalCar {
     private  double nitro = 80;
     /*
         Parameterized Constructor. Initialize the name of the car, his original speed and fuel calling
-        the constructor from the superclass Car.
-        @param  nameCar The name of the car. speed The original speed. fuel The original fuel
+        the constructor from the superclass fast Car.
+        @param nameCar The name of the fast car.
+        @param speed The original speed.
+        @param fuel The original fuel of the fast car.
      */
     public FastCar(String nameCar, Speed speed, Fuel fuel) {
         super(nameCar, speed, fuel);
     }
     /*
         Set the nitro of a fast car
-        @param The amount of nitro as a Double
+        @param nitro The amount of nitro.
      */
     public void setNitro(double nitro){this.nitro = nitro;}
     /*
@@ -29,8 +31,9 @@ public class FastCar extends NormalCar {
         Calculate the real speed of a car given the skill from de pilot who drives it
         and the complexity of the track where the car is running, bearing the amount of nitro
         in mind. This method override the getRealSpeed from the superclass Car
-        @param skills The pilot's skills. complexity The track's complexity
-        @return realSpeedInitial  The realSpeed of a car as a Float depending of the nitro
+        @param skills The pilot's skills.
+        @param complexity The track's complexity
+        @return The realSpeed of a car as a Float depending of the nitro.
      */
     @Override
     public double getRealSpeed(double skills, double complexity) {

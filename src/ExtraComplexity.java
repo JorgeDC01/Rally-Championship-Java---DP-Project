@@ -14,8 +14,9 @@ public enum ExtraComplexity {
     private final String name;
     /*
         Initialize the ExtraComplexity. Parameterized constructor.
-        @param Factor that have influence in the track's complexity.
-        @param Factor that have influence in the track's distance.
+        @param complexityFactor The factor that have influence in the track's complexity.
+        @param distanceFactor The factor that have influence in the track's distance.
+        @param name The name of the extra complexity
      */
     ExtraComplexity(double complexityFactor, double distanceFactor,String name) {
         this.complexityFactor = complexityFactor;

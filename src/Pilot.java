@@ -13,11 +13,13 @@ public abstract class Pilot implements IPilot {
     // as a key.
     private Map<String, Result> results;
     private boolean disqualifyPilot;
+    private int numbersGiveUp;
 
     /*
         Initialize a Pilot. Parameterized Constructor
-        @param The name of the pilot, The car that will be driven by the pilot, The concentration
-        and if he is qualified to stay on the championship.
+        @param namePilot The name of the pilot
+        @param carPilot The car that will be driven by the pilot
+        @param concentration The concentration of the pilot.
      */
     protected Pilot(String namePilot, ICar carPilot, Concentration concentration) {
         this.namePilot = namePilot;
@@ -25,102 +27,106 @@ public abstract class Pilot implements IPilot {
         this.concentration = concentration;
         this.results = new HashMap<String, Result>();
         this.disqualifyPilot = false;
+        this.numbersGiveUp = 0;
     }
-
     /*
         Get the name of the Pilot.
-        @return The name of the Pilot as a String
+        @return The name of the Pilot as a String.
      */
     public String getNamePilot() {
         return namePilot;
     }
-
     /*
         Set the name of the pilot.
-        @param The name of the Pilot as a String
+        @param namePilot The name of the Pilot as a String.
      */
     public void setNamePilot(String namePilot) {
         this.namePilot = namePilot;
     }
-
     /*
        Get the Car of the Pilot.
-       @return The Car of the Pilot as a Car
+       @return The Car of the Pilot as a Car.
     */
     public ICar getCarPilot() {
         return carPilot;
     }
-
     /*
         Set the Car of the pilot.
-        @param The car of the Pilot as a Car
+        @param carPilot The car of the Pilot as a Car.
      */
     public void setCarPilot(ICar carPilot) {
         this.carPilot = carPilot;
     }
-
     /*
         Get the name of the Pilot.
-        @return The name of the Pilot as a String
+        @return The name of the Pilot as a String.
      */
     public Concentration getConcentration() {
         return concentration;
     }
-
     /*
         Set the concentration of the pilot.
-        @param The Concentration of the Pilot as a enum concentration
+        @param concentration The Concentration of the Pilot as a enum concentration.
      */
     public void setConcentration(Concentration concentration) {
         this.concentration = concentration;
     }
-
     /*
-        Check and show if the Pilot is disqualified or not at the championship
+        Check and show if the Pilot is disqualified, so that shows in console that he is disqualified.
+        @param neglect The limited numbers of neglect that a pilot can do during the Championship.
      */
-    public void isDisqualifyPilot() {
+    public void isDisqualifyPilot(int neglect) {
         if (disqualifyPilot) {
-            System.out.println("The pilot can't participate in the championship anymore");
-        } else {
-            System.out.println("The pilot is qualified to keep going in the championship");
+            System.out.println("@@@\n¡¡¡" + getNamePilot() + " es DESCALIFICADO del campeonato por alcanzar el límite de abandonos(" + neglect + ") !!!\n@@@");
         }
     }
-
     /*
-        Set the state if the pilot is qualified or not
-        @param The state of the Pilot as a boolean
+        Set the state if the pilot is qualified or not.
+        @param disqualifyPilot The state of the Pilot as a boolean.
      */
     public void setDisqualifyPilot(boolean disqualifyPilot) {
         this.disqualifyPilot = disqualifyPilot;
     }
-
     /*
-        Get the state of a pilot if he is qualified or not to keep going into the championship
-        @return True if he is qualified and False if not
+        Get the state of a pilot if he is qualified or not to keep going into the championship.
+        @return True if he is qualified and False if not.
      */
     public boolean getDisqualifyPilot() {
         return this.disqualifyPilot;
     }
-
     /*
-        Get the Map of results of a Pilot.
-        @return The maps as a Map
+        Get the Map of results of a Pilot..
+        @return The maps as a Map.
      */
     public Map<String, Result> getResults() {
         return results;
     }
-
     /*
-        Set the map of results of a Pilot
-        @param The collection Map of results
+        Set the map of results of a Pilot.
+        @param results The collection Map of results.
      */
     public void setResults(Map<String, Result> results) {
         this.results = results;
     }
-
     /*
-        Override the equals method to compare if two pilots are identical(with their fields)
-        @return True if both cars are identical, and False if they aren't identical
+        Get the times that the pilot has given up during the championship.
+        @return The times as a Int.
+     */
+    public int getNumbersGiveUp() { return numbersGiveUp; }
+    /*
+        Increment the times given up by the pilots in one more time. If the times given up is greater than the limit,
+        set the disqualifiedPilot true.
+        @param neglect The limited numbers of neglect that a pilot can do during the Championship.
+     */
+    public void incrementNumbersGiveUp(int neglect){
+        this.numbersGiveUp++;
+        if( getNumbersGiveUp() == neglect){
+            setDisqualifyPilot(true);
+        }
+    }
+    /*
+        Override the equals method to compare if two pilots are identical(with their fields).
+         return True if both cars are identical, and False if they aren't identical.
      */
     @Override
     public boolean equals(Object obj) {
@@ -135,10 +141,9 @@ public abstract class Pilot implements IPilot {
                 getConcentration().getName().equals(other.getConcentration().getName()) &&
                 getDisqualifyPilot() == other.getDisqualifyPilot();
     }
-
     /*
         Override the hashcode method.
-        @return The code of a pilot as a Int
+        @return The code of a pilot as a Int.
      */
     @Override
     public int hashCode() {
@@ -149,10 +154,9 @@ public abstract class Pilot implements IPilot {
 
         return result;
     }
-
     /*
-        Find the track's result of a pilot and println it in console
-        @param The name of the track where a pilot competed
+        Find the track's result of a pilot and println it in console.
+        @param track The name of the track where a pilot competed.
      */
     public void specificResultTrack(String track) {
         if (results.containsKey(track)) {
@@ -164,7 +168,6 @@ public abstract class Pilot implements IPilot {
             }
         }
     }
-
     /*
         Calculate and return the total of points earned by a Pilot
         @return The total of points of results as a Int
@@ -176,7 +179,6 @@ public abstract class Pilot implements IPilot {
         }
         return total;
     }
-
     /*
         Calculate the total number of races that the Pilot has participated
         @return The total number of races competed by a pilot as a Int (races finished + left)
@@ -188,7 +190,19 @@ public abstract class Pilot implements IPilot {
         }
         return total;
     }
-
+    /*
+        Calculate total of races completed by a pilot.
+        @return Int the total of races completed.
+     */
+    public int numberRacesCompleted(){
+        int total = 0;
+        for(Result result: getResults().values()){
+            if(result.getTime() >= 0){
+                total++;
+            }
+        }
+        return total;
+    }
     /*
         Check if the Pilot has a car assigned to compete in a race.
         @return True if he can compete, and false if the pilot can't compete, showing a message
@@ -207,70 +221,85 @@ public abstract class Pilot implements IPilot {
         @return The skills as a Double
      */
     public abstract double calculateSkills();
-
     /*
-
-        @param The track where the pilot will run
+        ----------------------------------------------
+        @param track The track where the pilot will run.
     */
-    public void funcionalidadPilot(Track track) {
+    public void drivePilot(ITrack track) {
 
         if(canCompetePilot()){
+            System.out.println("+++ Con estas condiciones es capaz de correr a " + getCarPilot().getRealSpeed(calculateSkills(),track.getComplexity()) + " km/hour +++");
+
              if(!isConcentrationEnough(track)){
-                 storeResult(track,minutesToFinishRace(track) - getConcentration().getConcentrationPilot());
+                 double timeNeededToFinish = minutesToFinishRace(track) - getConcentration().getConcentrationPilot();
+                 System.out.println("¡¡¡ " + getNamePilot() + " perdió la concentración a falta de " + timeNeededToFinish + " minutos para terminar !!!");
+                 storeResult(track, getConcentration().getConcentrationPilot() - minutesToFinishRace(track));
                  reduceFuelOfCar(getConcentration().getConcentrationPilot());
-                }
+                 System.out.println("¡¡¡ En el momento del despiste llevaba en la carrera " + getConcentration().getConcentrationPilot() + " minutos !!!");
+                 incrementNumbersGiveUp(Organization.getInstance().getNeglectLimited());
+             }
              else if(!isFuelEnough(track)){
-                 storeResult(track,minutesToFinishRace(track) - getCarPilot().getFuelLeftOver());
+                 double timeNeededToFinish = minutesToFinishRace(track) - getCarPilot().getFuelLeftOver();
+                 System.out.println("¡¡¡ " + getCarPilot().getNameCar() + " se quedó sin combustible a falta de " + timeNeededToFinish + " minutos para terminar !!!");
+                 storeResult(track,getCarPilot().getFuelLeftOver() - minutesToFinishRace(track));
                  reduceFuelOfCar(getCarPilot().getFuelLeftOver());
+                 System.out.println("¡¡¡ " + getCarPilot().getFuelLeftOver() + " minutos !!!");
+                 incrementNumbersGiveUp(Organization.getInstance().getNeglectLimited());
              }
              else{
                 double minutesToFinish = minutesToFinishRace(track);
                 storeResult(track,minutesToFinish);
                 reduceFuelOfCar(minutesToFinish);
+                System.out.println("+++ " + getNamePilot() + "termina la carrera en " + minutesToFinish + " minutos +++");
              }
+             System.out.println("+++ El combustible del " + getCarPilot().getNameCar() + " tras la carrera es " + getCarPilot().getFuelLeftOver() + " +++\n" + "@@@");
+             isDisqualifyPilot(Organization.getInstance().getNeglectLimited());
         }
     }
     /*
-        Check if the pilot's concentration is enough to finish the race
-        @param The track where the pilot will run as a Track
-        @return True(concentration >= minutesToFinishRace) if he can finish the race and False(concentration < minutesToFinishRace) if he can't finish the race
+        Check if the pilot's concentration is enough to finish the race.
+        @param track The track where the pilot will run as a Track.
+        @return True(concentration >= minutesToFinishRace) if he can finish the race and False
+        (concentration < minutesToFinishRace) if he can't finish the race.
      */
-    public boolean isConcentrationEnough(Track track) {
+    public boolean isConcentrationEnough(ITrack track) {
         double concentration = getConcentration().getConcentrationPilot();
         double minutesToFinishRace = minutesToFinishRace(track);
         return (concentration >= minutesToFinishRace);
     }
     /*
-        Check if the fuel of the pilot's car is enough to finish the race
-        @param The track where the pilot will run as a Track
-        @return True if he can finish it (fuel of car >= minutesToFinishRace) and False (fuel of car < minutesToFinishRace) if he can't finish the race
+        Check if the fuel of the pilot's car is enough to finish the race.
+        @param track The track where the pilot will run as a Track.
+        @return True if he can finish it (fuel of car >= minutesToFinishRace) and False
+        (fuel of car < minutesToFinishRace) if he can't finish the race.
      */
-    public boolean isFuelEnough(Track track) {
+    public boolean isFuelEnough(ITrack track) {
         double fuel = getCarPilot().getFuelLeftOver();
         double minutesToFinishRace = minutesToFinishRace(track);
         return (fuel >= minutesToFinishRace);
     }
     /*
         Calculate the minutes needed to finish the race by a pilot with a car in a track.
-        @param The track where the pilot will run
-        @return The minutes to finish the race as a Double
+        @param track The track where the pilot will run.
+        @return The minutes to finish the race as a Double.
      */
-    public double minutesToFinishRace(Track track){
+    public double minutesToFinishRace(ITrack track){
         return getCarPilot().getTimeRace(track.getDistance(),getCarPilot().getRealSpeed(calculateSkills(),track.getComplexity()));
     }
     /*
         Save in the collection results a new result with the name of the track as a key and a new Result
-        as a value
-        @param The track where the pilot run and The time to save in the result
+        as a value.
+        @param track The track where the pilot run.
+        @param time The time to save in the result.
      */
-    public void storeResult(Track track,double time){
+    public void storeResult(ITrack track,double time){
         Result result = new Result();
         result.setTime(time);
         results.put(track.getNameTrack(),result);
     }
     /*
-        Reduce the fuel of a car using the minutes that the pilot has been running in the race
-        @param The minutes run by the pilot
+        Reduce the fuel of a car using the minutes that the pilot has been running in the race.
+        @param minutesRunning The minutes run by the pilot.
      */
     public void reduceFuelOfCar(double minutesRunning){
         getCarPilot().reduceFuel(minutesRunning);
