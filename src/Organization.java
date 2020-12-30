@@ -159,7 +159,7 @@ public class Organization {
         Show all the tracks of the Organization.
      */
     public void showTracksOrganization(){
-        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n + " +
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n" +
                             "||||||||||||||||||| CIRCUITOS DEL CAMPEONATO |||||||||||||||||||" +
                             "\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         Iterator<ITrack> it = getTracksOrganization().iterator();
@@ -246,7 +246,10 @@ public class Organization {
                     indexPilot++;
                 }
 
-                //Entrega de puntos a los pilotos que han corrido la carrera.
+                // Entrega de puntos a los pilotos que han corrido la carrera.
+                assignPoints(track.getNameTrack());
+                // Mostrar la clasificación de la carrera.
+                showResultsRace(track.getNameTrack());
             }
             indexTrack++;
         }
@@ -270,8 +273,67 @@ public class Organization {
     /*
         This method will assign points to the pilots that have run a race depending on the time needed to finish the race.
      */
-    public void assignPoints(){
+    public void assignPoints(String nameTrack){
         // First of all, I need to order the list of pilots that have competed about their times in a descendant way.
 
+        Collections.sort(getPilotsRace(),new TimeComparatorPilotsRace());
+        //showPilotsRaceOrganization();
+        //Ordeno los pilotos según los tiempos que se hayan marcado en la carrera.
+        Iterator<IPilot> it = getPilotsRace().iterator();
+        boolean stopNegativePoints = false;
+        IPilot pilot = null;
+        while(it.hasNext() && !stopNegativePoints) {        //Asigno 0 puntos a los que han abandonado.
+            pilot = it.next();
+            if (pilot.specificResultTrack(nameTrack).getTime() <= 0) {
+                pilot.assignPointsPilot(nameTrack, 0);
+            }
+            else {
+                stopNegativePoints = true;
+            }
+        }
+        int indexPilots = 1;
+        boolean stopUntilTwoPoints = false;
+        if(stopNegativePoints) {
+            while(it.hasNext()){
+                pilot = it.next();
+                switch (indexPilots){
+                    case 1:
+                        pilot.assignPointsPilot(nameTrack,10);
+                        break;
+                    case 2:
+                        pilot.assignPointsPilot(nameTrack,8);
+                        break;
+                    case 3:
+                        pilot.assignPointsPilot(nameTrack,6);
+                        break;
+                    case 4:
+                        pilot.assignPointsPilot(nameTrack,4);
+                        break;
+                    default:
+                        pilot.assignPointsPilot(nameTrack,2);
+                }
+                indexPilots++;
+            }
+        }
+    }
+    /*
+        Show the classification of the track where the race took place.
+        @param nameTrack The name of the track where the race have made.
+     */
+    public void showResultsRace(String nameTrack){
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" +
+                        "+++++++++++++++++ Clasificación final de la carrera en " + nameTrack + " +++++++++++++++++\n" +
+                        "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        int indexPilot = 1;
+        Collections.sort(getPilotsRace(), new PointComparatorPilotSpecificRace());
+        for(IPilot pilot: getPilotsRace()) {
+            if(pilot.specificResultTrack(nameTrack).getPoints() != 0) {
+                System.out.println("@@@ Posición(" + indexPilot + "): " + pilot.getNamePilot() + " - " + pilot.specificResultTrack(nameTrack).toString() + " @@@");
+            }
+            else{
+                System.out.println("!!! Ha abandonado " + pilot.getNamePilot() + " - " + pilot.specificResultTrack(nameTrack) + " !!!");
+            }
+            indexPilot++;
+        }
     }
 }

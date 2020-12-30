@@ -49,7 +49,7 @@ public class Result {
      */
     @Override
     public String toString() {
-        return "Time: " + getTime() + " minutes - " + "Points: " + getPoints() + " @@@";
+        return "Time: " + getTime() + " minutes - " + "Points: " + getPoints();
     }
     /*
         Override the method hashCode of the interface Object.

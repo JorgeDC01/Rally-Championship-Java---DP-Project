@@ -9,11 +9,13 @@ public abstract class Pilot implements IPilot {
     private String namePilot;
     private ICar carPilot;
     private Concentration concentration;
-    // Map as a collection to store all the results from a pilot with the name of the track
-    // as a key.
+    // Map as a collection to store all the results from a pilot with the name of the track as a key.
     private Map<String, Result> results;
     private boolean disqualifyPilot;
     private int numbersGiveUp;
+    // actualTrack represents the next track where the pilot will compete. It will make easier the sort of pilots
+    // to give them points.
+    private String actualTrack;
 
     /*
         Initialize a Pilot. Parameterized Constructor
@@ -28,6 +30,7 @@ public abstract class Pilot implements IPilot {
         this.results = new HashMap<String, Result>();
         this.disqualifyPilot = false;
         this.numbersGiveUp = 0;
+        this.actualTrack = "";
     }
     /*
         Get the name of the Pilot.
@@ -109,6 +112,16 @@ public abstract class Pilot implements IPilot {
         this.results = results;
     }
     /*
+        Get the name of the actual track where the pilot will compete.
+        @return The name of the track.
+     */
+    public String getActualTrack() { return actualTrack; }
+    /*
+        Set the name of the track where the pilot will compete.
+        @param actualTrack The name of the track where he will compete as a String.
+     */
+    public void setActualTrack(String actualTrack) { this.actualTrack = actualTrack; }
+    /*
         Get the times that the pilot has given up during the championship.
         @return The times as a Int.
      */
@@ -155,18 +168,12 @@ public abstract class Pilot implements IPilot {
         return result;
     }
     /*
-        Find the track's result of a pilot and println it in console.
+        Find the track's result of a pilot and return the time and points got it.
         @param track The name of the track where a pilot competed.
+        @return The Result of the pilot competed in the track.
      */
-    public void specificResultTrack(String track) {
-        if (results.containsKey(track)) {
-            Result r = results.get(track);
-            if(r != null)
-            System.out.println(r); //calls toString of a result
-            else{
-                System.out.println("Track didn't find ");
-            }
-        }
+    public Result specificResultTrack(String track) {
+        return getResults().get(track);
     }
     /*
         Calculate and return the total of points earned by a Pilot
@@ -226,10 +233,9 @@ public abstract class Pilot implements IPilot {
         @param track The track where the pilot will run.
     */
     public void drivePilot(ITrack track) {
-
         if(canCompetePilot()){
             System.out.println("+++ Con estas condiciones es capaz de correr a " + getCarPilot().getRealSpeed(calculateSkills(),track.getComplexity()) + " km/hour +++");
-
+            setActualTrack(track.getNameTrack());       //Añado el nombre del circuito donde corre al piloto.
              if(!isConcentrationEnough(track)){
                  double timeNeededToFinish = minutesToFinishRace(track) - getConcentration().getConcentrationPilot();
                  System.out.println("¡¡¡ " + getNamePilot() + " perdió la concentración a falta de " + timeNeededToFinish + " minutos para terminar !!!");
@@ -303,5 +309,14 @@ public abstract class Pilot implements IPilot {
      */
     public void reduceFuelOfCar(double minutesRunning){
         getCarPilot().reduceFuel(minutesRunning);
+    }
+    /*
+        Assign points to the result of a pilot in the track.
+        @param nameTrack The name of the track to find the result and points The points that will be assigned.
+     */
+    public void assignPointsPilot(String nameTrack,int points){
+        if(getResults().containsKey(nameTrack)){
+            getResults().get(nameTrack).setPoints(points);
+        }
     }
 }

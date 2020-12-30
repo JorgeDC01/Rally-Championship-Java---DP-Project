@@ -16,7 +16,9 @@ public interface IPilot {
     void incrementNumbersGiveUp(int neglect);
     Map<String, Result> getResults();
     void setResults(Map<String, Result> results);
-    void specificResultTrack(String track);
+    String getActualTrack();
+    void setActualTrack(String actualTrack);
+    Result specificResultTrack(String track);
     int totalPointsStored();
     int numberRacesCompeted();
     boolean canCompetePilot();
@@ -27,4 +29,5 @@ public interface IPilot {
     double minutesToFinishRace(ITrack track);
     void storeResult(ITrack track,double time);
     void reduceFuelOfCar(double minutesRunning);
+    void assignPointsPilot(String nameTrack,int points);
 }
