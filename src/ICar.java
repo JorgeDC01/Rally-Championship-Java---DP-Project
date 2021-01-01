@@ -10,4 +10,6 @@ public interface ICar {
     double getTimeRace(double distance,double realSpeed);
     void reduceFuel(double minutesCompeted);
     boolean hasFuelCar();
+    double getrealSpeed();
+    void setrealSpeed(double realSpeed);
 }

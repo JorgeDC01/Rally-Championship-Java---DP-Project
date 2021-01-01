@@ -234,32 +234,36 @@ public abstract class Pilot implements IPilot {
     */
     public void drivePilot(ITrack track) {
         if(canCompetePilot()){
-            System.out.println("+++ Con estas condiciones es capaz de correr a " + getCarPilot().getRealSpeed(calculateSkills(),track.getComplexity()) + " km/hour +++");
-            setActualTrack(track.getNameTrack());       //Añado el nombre del circuito donde corre al piloto.
-             if(!isConcentrationEnough(track)){
-                 double timeNeededToFinish = minutesToFinishRace(track) - getConcentration().getConcentrationPilot();
-                 System.out.println("¡¡¡ " + getNamePilot() + " perdió la concentración a falta de " + timeNeededToFinish + " minutos para terminar !!!");
-                 storeResult(track, getConcentration().getConcentrationPilot() - minutesToFinishRace(track));
+            double minutesToFinish = Math.round(minutesToFinishRace(track)*100d)/100d;
+            System.out.println("+++ Con estas condiciones es capaz de correr a " + getCarPilot().getrealSpeed() + " km/hour +++");
+
+            setActualTrack(track.getNameTrack());       //Añado el nombre del circuito donde corre al piloto. Me ayuda a comparar pilotos y poder ordenarlos para mostrar la clasificacion de una carrera
+             if(!isConcentrationEnough(track, minutesToFinish)){
                  reduceFuelOfCar(getConcentration().getConcentrationPilot());
+                 double timeNeededToFinish = Math.round((minutesToFinish - getConcentration().getConcentrationPilot())*100d)/100d;
+                 System.out.println("¡¡¡ " + getNamePilot() + " perdió la concentración a falta de " + timeNeededToFinish + " minutos para terminar !!!");
+                 storeResult(track, getConcentration().getConcentrationPilot() - minutesToFinish);
                  System.out.println("¡¡¡ En el momento del despiste llevaba en la carrera " + getConcentration().getConcentrationPilot() + " minutos !!!");
                  incrementNumbersGiveUp(Organization.getInstance().getNeglectLimited());
              }
-             else if(!isFuelEnough(track)){
-                 double timeNeededToFinish = minutesToFinishRace(track) - getCarPilot().getFuelLeftOver();
+             else if(!isFuelEnough(track, minutesToFinish)){
+                 reduceFuelOfCar(getCarPilot().getFuelLeftOver());
+                 //drivePilot(track);
+                 double timeNeededToFinish = minutesToFinish - getCarPilot().getFuelLeftOver();
                  System.out.println("¡¡¡ " + getCarPilot().getNameCar() + " se quedó sin combustible a falta de " + timeNeededToFinish + " minutos para terminar !!!");
-                 storeResult(track,getCarPilot().getFuelLeftOver() - minutesToFinishRace(track));
+                 storeResult(track,getCarPilot().getFuelLeftOver() - minutesToFinish);
                  reduceFuelOfCar(getCarPilot().getFuelLeftOver());
                  System.out.println("¡¡¡ " + getCarPilot().getFuelLeftOver() + " minutos !!!");
                  incrementNumbersGiveUp(Organization.getInstance().getNeglectLimited());
              }
              else{
-                double minutesToFinish = minutesToFinishRace(track);
-                storeResult(track,minutesToFinish);
-                reduceFuelOfCar(minutesToFinish);
-                System.out.println("+++ " + getNamePilot() + "termina la carrera en " + minutesToFinish + " minutos +++");
+                 reduceFuelOfCar(minutesToFinish);
+                 storeResult(track,minutesToFinish);
+                System.out.println("+++ " + getNamePilot() + " termina la carrera en " + minutesToFinish + " minutos +++");
              }
              System.out.println("+++ El combustible del " + getCarPilot().getNameCar() + " tras la carrera es " + getCarPilot().getFuelLeftOver() + " +++\n" + "@@@");
              isDisqualifyPilot(Organization.getInstance().getNeglectLimited());
+             getCarPilot().setrealSpeed(0);
         }
     }
     /*
@@ -268,9 +272,9 @@ public abstract class Pilot implements IPilot {
         @return True(concentration >= minutesToFinishRace) if he can finish the race and False
         (concentration < minutesToFinishRace) if he can't finish the race.
      */
-    public boolean isConcentrationEnough(ITrack track) {
+    public boolean isConcentrationEnough(ITrack track, double minutesToFinishRace) {
         double concentration = getConcentration().getConcentrationPilot();
-        double minutesToFinishRace = minutesToFinishRace(track);
+        //double minutesToFinishRace = minutesToFinishRace(track);
         return (concentration >= minutesToFinishRace);
     }
     /*
@@ -279,9 +283,9 @@ public abstract class Pilot implements IPilot {
         @return True if he can finish it (fuel of car >= minutesToFinishRace) and False
         (fuel of car < minutesToFinishRace) if he can't finish the race.
      */
-    public boolean isFuelEnough(ITrack track) {
+    public boolean isFuelEnough(ITrack track, double minutesToFinishRace) {
         double fuel = getCarPilot().getFuelLeftOver();
-        double minutesToFinishRace = minutesToFinishRace(track);
+        //double minutesToFinishRace = minutesToFinishRace(track);
         return (fuel >= minutesToFinishRace);
     }
     /*
@@ -300,7 +304,7 @@ public abstract class Pilot implements IPilot {
      */
     public void storeResult(ITrack track,double time){
         Result result = new Result();
-        result.setTime(time);
+        result.setTime(Math.round(time*100d)/100d);
         results.put(track.getNameTrack(),result);
     }
     /*
@@ -315,8 +319,29 @@ public abstract class Pilot implements IPilot {
         @param nameTrack The name of the track to find the result and points The points that will be assigned.
      */
     public void assignPointsPilot(String nameTrack,int points){
-        if(getResults().containsKey(nameTrack)){
             getResults().get(nameTrack).setPoints(points);
+    }
+    /*
+        Show the result of the pilot in console. First of all, it shows the total of points scored, and after that,
+        the results in all races.
+        @param ranking The ranking of the pilot that i want to show.
+     */
+    public void showResult(int ranking){
+        if(getDisqualifyPilot()){
+            System.out.println("--- Piloto descalificado: " + getNamePilot() + " - Puntos totales anulados: " + totalPointsStored() + " ---");
+            Iterator<Map.Entry<String,Result>> it = getResults().entrySet().iterator();
+            while(it.hasNext()){
+                Map.Entry<String,Result> aux = it.next();
+                System.out.println("Carrera(" + aux.getKey() + ") - Puntos: " + aux.getValue().getPoints() + " - Tiempo: " + aux.getValue().getTime() + " minutos");
+            }
+        }
+        else{
+            System.out.println("@@@ Posicion(" + ranking + "): " +  getNamePilot() + " - Puntos totales: " + totalPointsStored() + " @@@");
+            Iterator<Map.Entry<String,Result>> it = getResults().entrySet().iterator();
+            while(it.hasNext()){
+                Map.Entry<String,Result> aux = it.next();
+                System.out.println("Carrera(" + aux.getKey() + ") - Puntos: " + aux.getValue().getPoints() + " - Tiempo: " + aux.getValue().getTime() + " minutos");
+            }
         }
     }
 }

@@ -7,9 +7,9 @@ public class WetDecorator extends TrackDecorator{
 
     public WetDecorator(ITrack track) { super(track); }
     @Override
-    public double getComplexity() { return this.track.getComplexity()*1.15; }
+    public double getComplexity() { return Math.round(this.track.getComplexity()*1.15*100d)/100d; }
     @Override
-    public double getDistance() { return this.track.getDistance()*0.85; }
+    public double getDistance() { return Math.round(this.track.getDistance()*0.85*100d)/100d; }
     @Override
     public String getNoumExtras(){ return "WET " + this.track.getNoumExtras(); }
 }

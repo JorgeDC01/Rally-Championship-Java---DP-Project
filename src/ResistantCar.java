@@ -38,6 +38,7 @@ public class ResistantCar extends NormalCar{
         if(getExtraFuel() != 0 && minutesCompeted > super.getFuelLeftOver()){
             increaseFuelLeftOver(extraFuel);
             setExtraFuel(0);
+            System.out.println("+++ El " + getNameCar() + " tiene que recurrir al deposito de reserva para poder correr +++");
         }
          else{
         super.reduceFuel(minutesCompeted);

@@ -9,12 +9,14 @@ public class NormalCar implements ICar{
     Speed speedCar;
     Fuel initialFuel;
     double fuelLeftOver;
+    double realSpeed;
 
     public NormalCar(String nameCar,Speed speed, Fuel fuel){
         this.fuelLeftOver = fuel.getAmountFuel();
         this.nameCar = nameCar;
         this.initialFuel = fuel;
         this.speedCar = speed;
+        this.realSpeed = 0;
     }
     /*
         Return the name of the car
@@ -36,7 +38,17 @@ public class NormalCar implements ICar{
        Return the fuel that is left over from a car
        @return fuel leftover as a Double from a car
     */
-    public double getFuelLeftOver(){return fuelLeftOver;};
+    public double getFuelLeftOver(){return Math.round(fuelLeftOver*100d)/100d;}
+    /*
+        Set the real speed of the car.
+        @param realSpeed The real speed to set to the car.
+     */
+    public void setrealSpeed(double realSpeed){this.realSpeed = realSpeed;}
+    /*
+        Get the real speed from the field.
+        @return The real speed of the car depending on the pilot.
+     */
+    public double getrealSpeed(){return this.realSpeed; }
     /*
         Calculate the real speed of a car given the skill from de pilot who drives it
         and the complexity of the track where the car is running.
@@ -45,7 +57,9 @@ public class NormalCar implements ICar{
         @return double the real speed of a car as a Float.
     */
     public double getRealSpeed(double skills,double complexity){
-        return (getSpeedCar().getSpeed() * skills)/complexity;
+        double realSpeed = Math.round( ((getSpeedCar().getSpeed() * skills)/complexity)*100d)/100d;
+        setrealSpeed(realSpeed);
+        return realSpeed;
     }
     /*
         Calculate the time (minutes) needed to finish a race by a specific pilot in a
@@ -55,7 +69,7 @@ public class NormalCar implements ICar{
         @return a Double. The time needed to finish a race.
     */
     public double getTimeRace(double distance,double realSpeed){
-        return (distance/realSpeed)*60;
+        return Math.round(((distance/realSpeed)*60)*100d)/100d;
     }
     /*
         Refresh the new car's fuel (fuelLeftOver) depending of the minutes played in the track by a pilot.

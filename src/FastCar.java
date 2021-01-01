@@ -26,7 +26,7 @@ public class FastCar extends NormalCar {
         Get resistant car's nitro
         @return The nitro from a resistant car as a Double
      */
-    public double getNitro(){return this.nitro;}
+    public double getNitro(){return Math.round(this.nitro*100d)/100d;}
     /*
         Calculate the real speed of a car given the skill from de pilot who drives it
         and the complexity of the track where the car is running, bearing the amount of nitro
@@ -39,20 +39,26 @@ public class FastCar extends NormalCar {
     public double getRealSpeed(double skills, double complexity) {
         double realSpeedInitial = super.getRealSpeed(skills,complexity);
         if(getNitro() == 0){
+            setrealSpeed(realSpeedInitial);
             return realSpeedInitial;
         }
          else{
              //Case that nitro is enough to increase the realSpeed of the car to 20%
-             if(nitro >= 0.2*realSpeedInitial){
-                 setNitro(getNitro() - 0.2*realSpeedInitial);
+             if(nitro >= 0.2*realSpeedInitial) {
+                 setrealSpeed(realSpeedInitial);
+                 double nitroUsed = Math.round(0.2*realSpeedInitial*100d)/100d;
+                 setNitro(getNitro() - 0.2 * realSpeedInitial);
                  realSpeedInitial += 0.2 * realSpeedInitial;
-                 return realSpeedInitial;}
+                 System.out.println("+++ El " + getNameCar() + " usa " + nitroUsed + " de nitro para alcanzar " + realSpeedInitial + " km/hora y el nitro restante es " + getNitro() + " +++");
+             }
              //Case that nitro isn't enough to increase the realSpeed of the car up to 20%
             else{
                  realSpeedInitial += getNitro();
+                 setrealSpeed(realSpeedInitial);
+                 System.out.println("+++ El " + getNameCar() + " usa " +getNitro() + " de nitro para alcanzar " + getrealSpeed() + " km/hora y el nitro restante es " + 0 + " +++");
                  setNitro(0);
-                 return realSpeedInitial;
-            }
+             }
+            return Math.round(realSpeedInitial*100d)/100d;
         }
     }
     /*
@@ -90,5 +96,10 @@ public class FastCar extends NormalCar {
         result = 13*result + super.hashCode();
         result = (int) (11*result + getNitro());
         return result;
+    }
+
+    @Override
+    public double getTimeRace(double distance, double realSpeed) {
+        return super.getTimeRace(distance, realSpeed);
     }
 }

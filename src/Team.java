@@ -237,4 +237,30 @@ public class Team {
         }
         return list;
     }
+    /*
+        Return a list of all the pilots that aren't disqualified in a ArrayList
+        @return The list of pilots qualified of the team.
+     */
+    public List<IPilot> qualifiedPilotsTeam(){
+        List<IPilot> list = new ArrayList<IPilot>();
+        for(IPilot pilot: getPilotsTeam()){
+            if(!pilot.getDisqualifyPilot()){
+                list.add(pilot);
+            }
+        }
+        return list;
+    }
+    /*
+        Return a list of all the pilots that are  disqualified in a ArrayList
+        @return The list of pilots disqualified of the team.
+     */
+    public List<IPilot> disqualifiedPilotsTeam(){
+        List<IPilot> list = new ArrayList<IPilot>();
+        for(IPilot pilot: getPilotsTeam()){
+            if(pilot.getDisqualifyPilot()){
+                list.add(pilot);
+            }
+        }
+        return list;
+    }
 }

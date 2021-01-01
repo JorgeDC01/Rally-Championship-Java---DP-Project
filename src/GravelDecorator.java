@@ -6,9 +6,9 @@ public class GravelDecorator extends TrackDecorator{
 
     public GravelDecorator(ITrack track) { super(track); }
     @Override
-    public double getComplexity() { return super.getComplexity()*1.05; }
+    public double getComplexity() { return Math.round(super.getComplexity()*1.05*100d)/100d; }
     @Override
-    public double getDistance() { return super.getDistance()*0.95; }
+    public double getDistance() { return Math.round(super.getDistance()*0.95*100d)/100d; }
     @Override
     public String getNoumExtras(){ return "GRAVEL " + super.getNoumExtras(); }
 }

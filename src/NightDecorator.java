@@ -6,9 +6,9 @@ public class NightDecorator extends TrackDecorator{
 
     public NightDecorator(ITrack track) { super(track); }
     @Override
-    public double getComplexity() { return super.getComplexity()*1.2; }
+    public double getComplexity() { return Math.round(super.getComplexity()*1.2*100d)/100d; }
     @Override
-    public double getDistance() { return super.getDistance()*0.8; }
+    public double getDistance() { return Math.round(super.getDistance()*0.8*100d)/100d; }
     @Override
     public String getNoumExtras(){ return "NIGHT " + super.getNoumExtras(); }
 }

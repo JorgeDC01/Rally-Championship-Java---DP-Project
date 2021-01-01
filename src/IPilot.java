@@ -24,10 +24,11 @@ public interface IPilot {
     boolean canCompetePilot();
     double calculateSkills();
     void drivePilot(ITrack track);
-    boolean isConcentrationEnough(ITrack track);
-    boolean isFuelEnough(ITrack track);
+    boolean isConcentrationEnough(ITrack track, double minutesToFinishRace);
+    boolean isFuelEnough(ITrack track, double minutesToFinishRace);
     double minutesToFinishRace(ITrack track);
     void storeResult(ITrack track,double time);
     void reduceFuelOfCar(double minutesRunning);
     void assignPointsPilot(String nameTrack,int points);
+    void showResult(int ranking);
 }

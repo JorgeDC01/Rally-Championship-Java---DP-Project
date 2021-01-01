@@ -3,6 +3,7 @@
     other pilots.
     Override the method calculateSkills that is abstract in the class Pilot
  */
+import java.math.*;
 public class StarPilot extends Pilot{
     /*
         Initialize the beginner pilot. This Parameterized constructor calls the super constructor
@@ -19,7 +20,7 @@ public class StarPilot extends Pilot{
     */
     @Override
     public double calculateSkills() {
-        double v = (((getConcentration().getConcentrationPilot() + 6) / 140)*1.06) + 0.05;
+        double v = Math.round( ((((getConcentration().getConcentrationPilot() + 6) / 140)*1.06) + 0.05)*100d)/100d;
         return v;
     }
     /*

@@ -7,9 +7,9 @@ public class ColdDecorator extends TrackDecorator{
 
     public ColdDecorator(ITrack track) { super(track); }
     @Override
-    public double getComplexity() { return this.track.getComplexity()*1.1; }
+    public double getComplexity() { return Math.round(this.track.getComplexity()*1.1*100d)/100d; }
     @Override
-    public double getDistance() { return this.track.getDistance()*0.9; }
+    public double getDistance() { return Math.round(this.track.getDistance()*0.9*100d)/100d; }
     @Override
     public String getNoumExtras(){ return "COLD " + this.track.getNoumExtras(); }
 }
