@@ -229,35 +229,45 @@ public abstract class Pilot implements IPilot {
      */
     public abstract double calculateSkills();
     /*
-        ----------------------------------------------
+        The pilot drives in the track depending on his car's fuel and his concentration. So that there will be many different
+        situations in which the pilot will tend to do things.
         @param track The track where the pilot will run.
     */
     public void drivePilot(ITrack track) {
         if(canCompetePilot()){
+            boolean nothing;
             double minutesToFinish = Math.round(minutesToFinishRace(track)*100d)/100d;
             System.out.println("+++ Con estas condiciones es capaz de correr a " + getCarPilot().getrealSpeed() + " km/hour +++");
-
             setActualTrack(track.getNameTrack());       //Añado el nombre del circuito donde corre al piloto. Me ayuda a comparar pilotos y poder ordenarlos para mostrar la clasificacion de una carrera
-             if(!isConcentrationEnough(track, minutesToFinish)){
-                 reduceFuelOfCar(getConcentration().getConcentrationPilot());
-                 double timeNeededToFinish = Math.round((minutesToFinish - getConcentration().getConcentrationPilot())*100d)/100d;
-                 System.out.println("¡¡¡ " + getNamePilot() + " perdió la concentración a falta de " + timeNeededToFinish + " minutos para terminar !!!");
-                 storeResult(track, getConcentration().getConcentrationPilot() - minutesToFinish);
-                 System.out.println("¡¡¡ En el momento del despiste llevaba en la carrera " + getConcentration().getConcentrationPilot() + " minutos !!!");
-                 incrementNumbersGiveUp(Organization.getInstance().getNeglectLimited());
+
+            if(!isConcentrationEnough(track, minutesToFinish)){
+                 //nothing = reduceFuelOfCar(getConcentration().getConcentrationPilot());
+                 if(!reduceFuelOfCar(getConcentration().getConcentrationPilot())){      // Si al reducir el combustible el coche rapido tiene reserva,entonces usa la reserva y vuelve a comprobar las condiciones.
+                     drivePilot(track);
+                 }
+                 else{
+                     double timeNeededToFinish = Math.round((minutesToFinish - getConcentration().getConcentrationPilot())*100d)/100d;
+                     System.out.println("¡¡¡ " + getNamePilot() + " perdió la concentración a falta de " + timeNeededToFinish + " minutos para terminar !!!");
+                     storeResult(track, getConcentration().getConcentrationPilot() - minutesToFinish);
+                     System.out.println("¡¡¡ En el momento del despiste llevaba en la carrera " + getConcentration().getConcentrationPilot() + " minutos !!!");
+                     incrementNumbersGiveUp(Organization.getInstance().getNeglectLimited());
+                 }
              }
              else if(!isFuelEnough(track, minutesToFinish)){
-                 reduceFuelOfCar(getCarPilot().getFuelLeftOver());
-                 //drivePilot(track);
-                 double timeNeededToFinish = minutesToFinish - getCarPilot().getFuelLeftOver();
-                 System.out.println("¡¡¡ " + getCarPilot().getNameCar() + " se quedó sin combustible a falta de " + timeNeededToFinish + " minutos para terminar !!!");
-                 storeResult(track,getCarPilot().getFuelLeftOver() - minutesToFinish);
-                 reduceFuelOfCar(getCarPilot().getFuelLeftOver());
-                 System.out.println("¡¡¡ " + getCarPilot().getFuelLeftOver() + " minutos !!!");
-                 incrementNumbersGiveUp(Organization.getInstance().getNeglectLimited());
+                 if(!reduceFuelOfCar(minutesToFinish)) {
+                     drivePilot(track);
+                 }
+                 else{
+                     double timeNeededToFinish = minutesToFinish - getCarPilot().getFuelLeftOver();
+                     System.out.println("¡¡¡ " + getCarPilot().getNameCar() + " se quedó sin combustible a falta de " + timeNeededToFinish + " minutos para terminar !!!");
+                     storeResult(track, getCarPilot().getFuelLeftOver() - minutesToFinish);
+                     nothing = reduceFuelOfCar(getCarPilot().getFuelLeftOver());
+                     System.out.println("¡¡¡ " + getCarPilot().getFuelLeftOver() + " minutos !!!");
+                     incrementNumbersGiveUp(Organization.getInstance().getNeglectLimited());
+                 }
              }
              else{
-                 reduceFuelOfCar(minutesToFinish);
+                 nothing = reduceFuelOfCar(minutesToFinish);
                  storeResult(track,minutesToFinish);
                 System.out.println("+++ " + getNamePilot() + " termina la carrera en " + minutesToFinish + " minutos +++");
              }
@@ -311,8 +321,8 @@ public abstract class Pilot implements IPilot {
         Reduce the fuel of a car using the minutes that the pilot has been running in the race.
         @param minutesRunning The minutes run by the pilot.
      */
-    public void reduceFuelOfCar(double minutesRunning){
-        getCarPilot().reduceFuel(minutesRunning);
+    public boolean reduceFuelOfCar(double minutesRunning){
+        return getCarPilot().reduceFuel(minutesRunning);
     }
     /*
         Assign points to the result of a pilot in the track.

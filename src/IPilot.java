@@ -28,7 +28,7 @@ public interface IPilot {
     boolean isFuelEnough(ITrack track, double minutesToFinishRace);
     double minutesToFinishRace(ITrack track);
     void storeResult(ITrack track,double time);
-    void reduceFuelOfCar(double minutesRunning);
+    boolean reduceFuelOfCar(double minutesRunning);
     void assignPointsPilot(String nameTrack,int points);
     void showResult(int ranking);
 }

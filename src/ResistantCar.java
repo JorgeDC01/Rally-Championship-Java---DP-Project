@@ -34,14 +34,15 @@ public class ResistantCar extends NormalCar{
         @param minutesCompeted The minutes competed by a car to reduce the fuel as a Double.
      */
     @Override
-    public void reduceFuel(double minutesCompeted) {
-        if(getExtraFuel() != 0 && minutesCompeted > super.getFuelLeftOver()){
-            increaseFuelLeftOver(extraFuel);
+    public boolean reduceFuel(double minutesCompeted) {
+        if(getExtraFuel() != 0 && minutesCompeted >= super.getFuelLeftOver()){
+            increaseFuelLeftOver(getExtraFuel());
             setExtraFuel(0);
             System.out.println("+++ El " + getNameCar() + " tiene que recurrir al deposito de reserva para poder correr +++");
+            return false;
         }
          else{
-        super.reduceFuel(minutesCompeted);
+        return super.reduceFuel(minutesCompeted);
          }
     }
     /*

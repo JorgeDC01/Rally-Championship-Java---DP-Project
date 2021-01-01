@@ -76,7 +76,10 @@ public class NormalCar implements ICar{
         @param minutesCompeted The pilot's competed with the car in a race.
         The fuel reduced depends on the minutes competed.
     */
-    public void reduceFuel(double minutesCompeted){this.fuelLeftOver = this.fuelLeftOver - minutesCompeted; }
+    public boolean reduceFuel(double minutesCompeted){
+        this.fuelLeftOver = this.fuelLeftOver - minutesCompeted;
+        return true;
+    }
 
     /*
        Override the method toString returning the Name, Speed, initial fuel, and fuelLeftOver from a car

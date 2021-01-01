@@ -8,7 +8,7 @@ public interface ICar {
     double getFuelLeftOver();
     double getRealSpeed(double skills,double complexity);
     double getTimeRace(double distance,double realSpeed);
-    void reduceFuel(double minutesCompeted);
+    boolean reduceFuel(double minutesCompeted);
     boolean hasFuelCar();
     double getrealSpeed();
     void setrealSpeed(double realSpeed);
