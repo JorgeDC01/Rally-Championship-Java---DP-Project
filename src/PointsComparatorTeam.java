@@ -1,3 +1,6 @@
+/*
+    Comparator to sort teams about their points earned.
+ */
 import java.util.Comparator;
 public class PointsComparatorTeam implements Comparator<Team>{
 

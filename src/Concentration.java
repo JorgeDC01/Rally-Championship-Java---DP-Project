@@ -1,3 +1,7 @@
+/*
+    This class represents all the kind of concentrations from a pilot.
+    Each instance from this class is formed with the name of the concentration and the amount of it.
+ */
 public enum Concentration {
     SCATTERBRAIN("SCATTERBRAIN",90),
     NORMAL("NORMAL",100),

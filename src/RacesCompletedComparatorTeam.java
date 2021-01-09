@@ -1,3 +1,6 @@
+/*
+    Comparator of teams depending on the races completed.
+ */
 import java.util.Comparator;
 public class RacesCompletedComparatorTeam implements Comparator<Team>{
 

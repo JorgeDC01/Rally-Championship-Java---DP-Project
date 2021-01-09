@@ -331,7 +331,8 @@ public abstract class Pilot implements IPilot {
         }
     }
     /*
-
+        This method is called if the fuel and the concentration is enough to end a race by a pilot.
+        Println in console the minutes needed to finish the race.
      */
     public void enoughConcentrationAndFuel(ITrack track, double minutesToFinish){
         boolean nothing = reduceFuelOfCar(minutesToFinish);

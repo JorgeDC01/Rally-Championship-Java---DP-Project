@@ -1,3 +1,6 @@
+/*
+    Comparator of pilots about their skills.
+ */
 import java.util.Comparator;
 /*
     A comparator that compares the skills  btw 2 Pilots. In case of equality, The pilots will

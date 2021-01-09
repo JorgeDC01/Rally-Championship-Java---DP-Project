@@ -4,7 +4,10 @@
  */
 
 public class ColdDecorator extends TrackDecorator{
-
+    /*
+        Create the extra complexity cold for a track.
+        @param track The track that will have a new extra complexity.
+     */
     public ColdDecorator(ITrack track) { super(track); }
     @Override
     public double getComplexity() { return Math.round(this.track.getComplexity()*1.1*100d)/100d; }

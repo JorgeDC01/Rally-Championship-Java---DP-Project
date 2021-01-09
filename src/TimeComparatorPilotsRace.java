@@ -1,3 +1,6 @@
+/*
+    Comparator about the time run in a specific race.
+ */
 import java.util.Comparator;
 public class TimeComparatorPilotsRace implements Comparator<IPilot>{
     /*

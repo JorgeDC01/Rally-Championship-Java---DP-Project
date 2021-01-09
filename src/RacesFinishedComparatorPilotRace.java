@@ -1,3 +1,6 @@
+/*
+       Comparator of pilots about the races finished to sort them before the race.
+ */
 import java.util.Comparator;
 
 public class RacesFinishedComparatorPilotRace implements Comparator<IPilot> {

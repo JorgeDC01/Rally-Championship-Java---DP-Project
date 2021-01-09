@@ -1,4 +1,8 @@
+/*
+    Compare two pilots in a specific race to sort them depending on their results.
+ */
 import java.util.Comparator;
+
 public class PointComparatorPilotSpecificRace implements Comparator<IPilot>{
     /*
         Override the method compare of two pilots depending on the points got by two pilots in the same race.

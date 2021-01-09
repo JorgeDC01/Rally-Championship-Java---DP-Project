@@ -1,6 +1,6 @@
 /*
     This class represents the result of a Pilot in any track. The result is formed with the
-    time competed by a pilot in a track and the points that he got.
+    time competed by a pilot in a track and the points which he got.
  */
 public class Result {
     private double time;

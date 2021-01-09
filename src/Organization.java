@@ -9,6 +9,8 @@
     - comparatorTracks: Is the strategy used to order the ArrayList of tracks.
     - ascOrDescTracks: True if the tracks will be sorted in a ascendant way or false if it 'll be sorted in a descendant way.
     - teamsOrganization: The collection of teams that registered at the Organization of the Championship.
+    - pilotsRace: The pilots that will compete in a race in a collection.
+    - comparatorPilotsRace: to sort the pilots of the race.
  */
 import java.util.*;
 public class Organization {
@@ -232,7 +234,7 @@ public class Organization {
     }
 
     /*
-        Shoe all the pilots that will compete in the race.
+        Show all the pilots that will compete in the race.
      */
     public void showPilotsRaceOrganization() {
         for (IPilot pilot : getPilotsRace())
