@@ -49,13 +49,13 @@ public class FastCar extends NormalCar {
                  double nitroUsed = Math.round(0.2*realSpeedInitial*100d)/100d;
                  setNitro(getNitro() - 0.2 * realSpeedInitial);
                  realSpeedInitial += 0.2 * realSpeedInitial;
-                 System.out.println("+++ El " + getNameCar() + " usa " + nitroUsed + " de nitro para alcanzar " + realSpeedInitial + " km/hora y el nitro restante es " + getNitro() + " +++");
+                 System.out.println("+++ El " + getNameCar() + " usa " + nitroUsed + " de nitro para alcanzar " + Math.round(realSpeedInitial*100d)/100d + " km/hora y el nitro restante es " + getNitro() + " +++");
              }
              //Case that nitro isn't enough to increase the realSpeed of the car up to 20%
             else{
-                 realSpeedInitial += getNitro();
                  setrealSpeed(realSpeedInitial);
-                 System.out.println("+++ El " + getNameCar() + " usa " +getNitro() + " de nitro para alcanzar " + getrealSpeed() + " km/hora y el nitro restante es " + 0 + " +++");
+                 realSpeedInitial += getNitro();
+                 System.out.println("+++ El " + getNameCar() + " usa " + getNitro() + " de nitro para alcanzar " + Math.round(realSpeedInitial*100d)/100d + " km/hora y el nitro restante es " + 0 + " +++");
                  setNitro(0);
              }
             return Math.round(realSpeedInitial*100d)/100d;

@@ -147,17 +147,16 @@ public class Team {
      */
     public void addCar(ICar car){getCarsTeam().add(car);}
     /*
-        Get information about all pilot's results of the team and println them
-        in console.
-        @return The total points scored by the pilots of a team.
+        Get the total races completed of the team by his pilots during the championship.
+        @return The total of races completed.
      */
-    public int getTeamPoints(){
-        Iterator<IPilot> it = pilotsTeam.iterator();
-        int points = 0;
+    public int getRacesCompleted(){
+        Iterator<IPilot> it = getPilotsTeam().iterator();
+        int countRacesCompleted = 0;
         while(it.hasNext()){
-            points=+ it.next().totalPointsStored();
+            countRacesCompleted =+ it.next().numberRacesCompleted();
         }
-        return points;
+        return countRacesCompleted;
     }
     /*
         The team registers in the Championship with the Organization.
@@ -175,7 +174,7 @@ public class Team {
         result = 7 * result + getNameTeam().hashCode();
         result = 13 * result + getPilotsTeam().hashCode();
         result = 11 * result + getCarsTeam().hashCode();
-        result = 5 * result + getTeamPoints();
+        result = 5 * result + pointsTeam();
         return result;
     }
     /*
@@ -204,6 +203,7 @@ public class Team {
         for(int i = 0; i < getPilotsTeam().size(); i++){
             output = output + getPilotsTeam().get(i).toString() + "\n";
         }
+
         for(int i = 0; i < getCarsTeam().size(); i++){
             output = output + getCarsTeam().get(i).toString() + "\n";
         }
@@ -262,5 +262,32 @@ public class Team {
             }
         }
         return list;
+    }
+    /*
+        Indicates if the team is qualified or disqualified at the end of the championship.
+        @return True if it is qualified and false if it is disqualified.
+     */
+    public boolean isQualifiedTeamEnd(){
+        boolean qualified = false;
+        Iterator<IPilot> it = getPilotsTeam().iterator();
+        while(it.hasNext() && !qualified){
+            if(!it.next().getDisqualifyPilot()){
+                qualified = true;
+            }
+        }
+        return qualified;
+    }
+    /*
+        Calculate the total of points scored by the team's pilots.
+        @return The total points scored by the team.
+     */
+    public int pointsTeam(){
+        int cont = 0;
+        for(IPilot pilot: getPilotsTeam()) {
+            if(!pilot.getDisqualifyPilot()) {
+                cont = cont + pilot.totalPointsStored();
+            }
+        }
+        return cont;
     }
 }

@@ -6,7 +6,7 @@
  * @version 20/21
  */
 public class DatosCampeonatoPremioDesierto {
-	private DatosCampeonatoPremioDesierto() {
+	public DatosCampeonatoPremioDesierto() {
 		System.out.println("*********************************************************************************************************");
 		System.out.println("****ESTA SIMULACIÓN CONCLUYE ANTES DE FINALIZAR EL CAMPEONATO CON TODOS LOS PILOTOS DESCALIFICADOS****");
 		System.out.println("*********************************************************************************************************\n");
@@ -17,85 +17,83 @@ public class DatosCampeonatoPremioDesierto {
 		//organizador debe ser una instancia única con la siguiente configuración:
 		//LimiteAbandonos=1, LimitePilotos=3, 
 		// Circuitos ordenados de forma descendente de acuerdo a su distancia
+		Organization org = Organization.getInstance();
+		org.setConfigOrganization(1,3,new DistanceComparatorTrack(), false,new PointComparatorPilotRace());
+		//Añadimos los circuitos a la organización.
+		ITrack t1;
+		t1 = new Track("PORTUGAL", ComplexityTrack.MEDIUM, DistanceTrack.INTERMEDIATE);
+		t1 = new GravelDecorator(t1);
+		t1 = new NightDecorator(t1);
+		org.addTrack(t1);
 
-		//creamos y añadimos los circuitos del campeonato:
-		//Crear circuito portugal con nombre:”Portugal" - complejidad:MEDIA - distancia:INTERMEDIA);
-		//además, acciones necesarias para que portugal sea un circuito con:
-		//Gravilla y Nocturno
-		//añadir circuito portugal a circuitos de la organización
+		t1 = new Track("CERDEÑA",ComplexityTrack.HIGH,DistanceTrack.SHORT);
+		t1 = new GravelDecorator(t1);
+		t1 = new WetDecorator(t1);
+		org.addTrack(t1);
 
-		//Crear circuito cerdena con nombre:”Cerdeña" - complejidad:ALTA - distancia:CORTA);
-		//además, acciones necesarias para que cerdena sea un circuito con:
-		//Gravilla y Mojado
-		//añadir circuito cerdena a circuitos de la organización
+		t1 = new Track("AUSTRALIA",ComplexityTrack.LOW,DistanceTrack.LONG);
+		t1 = new GravelDecorator(t1);
+		org.addTrack(t1);
 
-		//Crear circuito australia con nombre:”Australia" - complejidad:BAJA - distancia:LARGA);
-		//además, acciones necesarias para que australia sea un circuito con:
-		//Gravilla 
-		//añadir circuito australia a circuitos de la organización
+		t1 = new Track("CÓRCEGA",ComplexityTrack.MEDIUM,DistanceTrack.INTERMEDIATE);
+		t1 = new NightDecorator(t1);
+		t1 = new GravelDecorator(t1);
+		org.addTrack(t1);
 
-		//Crear circuito corcega con nombre:”Córcega" - complejidad:MEDIA - distancia:INTERMEDIA);
-		//además, acciones necesarias para que corcega sea un circuito con:
-		//Nocturno y Gravilla
-		//añadir circuito corcega a circuitos de la organización		
+		t1 = new Track("FINLANDIA",ComplexityTrack.HIGH,DistanceTrack.SHORT);
+		t1 = new NightDecorator(t1);
+		t1 = new ColdDecorator(t1);
+		t1 = new WetDecorator(t1);
+		org.addTrack(t1);
 
-		//Crear circuito finlandia con nombre:”Finlandia" - complejidad:ALTA - distancia:CORTA);
-		//además, acciones necesarias para que finlandia sea un circuito con:
-		//Nocturno, Frío y Mojado
-		//añadir circuito finlandia a circuitos de la organización
+		t1 = new Track("ALEMANIA",ComplexityTrack.MEDIUM,DistanceTrack.INTERMEDIATE);
+		t1 = new WetDecorator(t1);
+		org.addTrack(t1);
 
-		//Crear circuito alemania con nombre:”Alemania" - complejidad:MEDIA - distancia:INTERMEDIA);
-		//además, acciones necesarias para que alemania sea un circuito con:
-		//Mojado
-		//añadir circuito alemania a circuitos de la organización
+		t1 = new Track("CHILE",ComplexityTrack.HIGH,DistanceTrack.SHORT);
+		t1 = new GravelDecorator(t1);
+		org.addTrack(t1);
 
-		//Crear circuito chile con nombre:”Chile" - complejidad:ALTA - distancia:CORTA);
-		//además, acciones necesarias para que chile sea un circuito con:
-		//Gravilla
-		//añadir circuito chile a circuitos de la organización
+		//creamos e inscribimos a las escuderías que participarán en el campeonato:
+		//escudería peugeot
+		Team T1 = new Team("Peugeot",false,true,new PointComparatorPilot(),new FuelComparatorCar());
+		T1.registerTeam();
+		//escudería citroen
+		Team T2 = new Team("Citroen",true,true,new PointComparatorPilot(),new FuelComparatorCar());
+		T2.registerTeam();
+		//escudería seat
+		Team T3 = new Team("Seat",false,true,new PointComparatorPilot(),new FuelComparatorCar());
+		T3.registerTeam();
 
-		//creamos e inscribimos a las escuderías que participarán en el campeonato:    
-		//Crear escuderia peugeot con nombre:"Peugeot"
-		//ordenaciónPilotos: descendente por Puntos del Piloto, en caso de empate por Destreza, en caso de empate por nombre
-		//ordenaciónCoches: ascendente por Combustible restante del Coche , en caso de empate por nombre);
-		//peugeot se inscribe en campeonato
+		// Pilotos y coches de citroen
+		T2.addPilot(new ExperiencedPilot("Loeb",null,Concentration.NORMAL));
+		T2.addPilot(new StarPilot("Makinen",null,Concentration.ZEN));
+		T2.addPilot(new BeginnerPilot("Auriol",null,Concentration.NORMAL));
+		T2.addCar(new ResistantCar("Citröen C5",Speed.FAST,Fuel.ELEPHANT));
+		T2.addCar(new FastCar("Citröen C4",Speed.FAST,Fuel.RARE));
+		T2.addCar(new NormalCar("Citröen C3",Speed.FAST,Fuel.RARE));
+		T2.sortPilots();
+		T2.sortCars();
 
-		//escudería citroen 
-		//Crear escuderia citroen con nombre:"Citroen"		
-		//ordenaciónPilotos: ascendente por Puntos del Piloto, en caso de empate por Destreza, en caso de empate por nombre
-		//ordenaciónCoches: ascendente por Combustible restante del Coche , en caso de empate por nombre);
-		//citroen se inscribe en campeonato
-
-		//escudería seat       
-		//Crear escuderia seat con nombre:"Seat"
-		//ordenaciónPilotos: descendente por Puntos del Piloto, en caso de empate por Destreza, en caso de empate por nombre
-		//ordenaciónCoches: ascendente por Combustible restante del Coche , en caso de empate por nombre);
-		//seat se inscribe en campeonato
-
-		//creamos los pilotos y los coches de cada escudería 
-		//coches y pilotos de citroen
-		//añadir a citroen un CocheResistente(nombre:"Citröen C5" - velocidad:RAPIDA - combustible:ELEFANTE);
-		//añadir a citroen un CocheRapido(nombre:"Citröen C4" - velocidad:RAPIDA - combustible:ESCASO);
-		//añadir a citroen un Coche(nombre:"Citröen C3" - velocidad:RAPIDA - combustible:ESCASO);
-		//añadir a citroen un PilotoExperimentado(nombre:"Loeb" - concentración: NORMAL));
-		//añadir a citroen un PilotoEstrella(nombre:"Makinen" - concentración: ZEN));
-		//añadir a citroen un PilotoNovato(nombre:"Auriol" - concentración: NORMAL));
-
-		//coches y pilotos de seat
-		//añadir a seat un CocheResistente(nombre:"Seat Tarraco" - velocidad:TORTUGA - combustible:GENEROSO);
-		//añadir a seat un CocheRapido(nombre:"Seat Ateca" - velocidad:GUEPARDO - combustible:GENEROSO);
-		//añadir a seat un Coche(nombre:"Seat Arona" - velocidad:RAPIDA - combustible:ESCASO);
-		//añadir a seat un PilotoExperimentado(nombre:"Ogier" - concentración: NORMAL));
-		//añadir a seat un PilotoEstrella(nombre:"McRae" - concentración: CONCENTRADO));
-		//añadir a seat un PilotoNovato(nombre:"Blomquist" - concentración: DESPISTADO));
+		//creamos los pilotos y coches de seat
+		T3.addPilot(new ExperiencedPilot("Ogier",null,Concentration.NORMAL));
+		T3.addPilot(new StarPilot("McRae",null,Concentration.CONCENTRATED));
+		T3.addPilot(new BeginnerPilot("Blomquist",null,Concentration.SCATTERBRAIN));
+		T3.addCar(new ResistantCar("Seat Tarraco",Speed.TURTLE,Fuel.LARGE));
+		T3.addCar(new FastCar("Seat Ateca",Speed.CHEETAH,Fuel.LARGE));
+		T3.addCar(new NormalCar("Seat Arona",Speed.FAST,Fuel.RARE));
+		T3.sortPilots();
+		T3.sortCars();
 
 		//coches y pilotos de peugeot
-		//añadir a peugeot un CocheResistente(nombre:"Peugeot 5008" - velocidad:LENTA - combustible:GENEROSO);
-		//añadir a peugeot un CocheRapido(nombre:"Peugeot 3008" - velocidad:GUEPARDO - combustible:NORMAL);
-		//añadir a peugeot un Coche(nombre:"Peugeot 2008" - velocidad:NORMAL - combustible:ESCASO);
-		//añadir a peugeot un PilotoExperimentado(nombre:"Kankunnen" - concentración: CONCENTRADO));
-		//añadir a peugeot un PilotoEstrella(nombre:"Sainz" - concentración: ZEN ));
-		//añadir a peugeot un PilotoNovato(nombre:"Sordo" - concentración: DESPISTADO));
+		T1.addPilot(new ExperiencedPilot("Kankunnen",null,Concentration.CONCENTRATED));
+		T1.addPilot(new StarPilot("Sainz",null,Concentration.ZEN));
+		T1.addPilot(new BeginnerPilot("Sordo",null,Concentration.SCATTERBRAIN));
+		T1.addCar(new ResistantCar("Peugeot 5008",Speed.SLOW,Fuel.LARGE));
+		T1.addCar(new FastCar("Peugeot 3008",Speed.CHEETAH,Fuel.NORMAL));
+		T1.addCar(new NormalCar("Peugeot 2008",Speed.NORMAL,Fuel.RARE));
+		T1.sortPilots();
+		T1.sortCars();
 
 	}
 

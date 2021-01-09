@@ -215,8 +215,8 @@ public class Organization {
     public void showTracksOrganization() {
         sortTracksOrganization();
         System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n" +
-                        "||||||||||||||||||| CIRCUITOS DEL CAMPEONATO |||||||||||||||||||" +
-                        "\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+                            "||||||||||||||||||| CIRCUITOS DEL CAMPEONATO |||||||||||||||||||" +
+                            "\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         Iterator<ITrack> it = getTracksOrganization().iterator();
         while (it.hasNext()) {
             System.out.println(it.next());
@@ -295,12 +295,12 @@ public class Organization {
             sortPilotsRace();                   // Ordena la parrilla de salida de la carrera.
             if (getPilotsRace().size() > 1) {       //Si el numero de pilots es mayor que 1, se puede correr la carrera.
                 System.out.println("********************************************************************************************************\n********************************************************************************************************\n" +
-                        "********************************  Pilotos que van a competir en " + track.getNameTrack() + " ********************************\n" +
-                        "********************************************************************************************************");
+                                    "********************************  Pilotos que van a competir en " + track.getNameTrack() + " ********************************\n" +
+                                    "********************************************************************************************************");
                 showPilotsRaceOrganization();       // Muestro pilotos que van a competir en la carrera.
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" +
-                        "+++++++++++++++++++++++++ Comienza la carrera en " + track.getNameTrack() + " +++++++++++++++++++++++++\n" +
-                        "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                                    "+++++++++++++++++++++++++ Comienza la carrera en " + track.getNameTrack() + " +++++++++++++++++++++++++\n" +
+                                    "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
                 int indexPilot = 1;
                 for (IPilot pilot : getPilotsRace()) {
@@ -318,22 +318,24 @@ public class Organization {
                 notEnoughPilots = true;     //No hay suficientes pilotos para correrse la carrera
                 System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡\n" +
                                     "!!! No se celebra esta carrera ni la(s) siguiente(s) por no haber pilotos para competir !!!\n" +
-                                    "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n" +
-                                    "****************************************************\n" +
-                                    "**************** FIN DEL CAMPEONATO ****************\n" +
-                                    "****************************************************\n" +
-                                    "********** CLASIFICACIÓN FINAL DE PILOTOS **********\n" +
-                                    "****************************************************");
+                                    "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 if(getPilotsRace().size() == 0){        // Si todos los pilotos están descalificados
 
-                    System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡\n" +
+                    System.out.println("****************************************************\n" +
+                                        "**************** FIN DEL CAMPEONATO ****************\n" +
+                                        "****************************************************\n" +
+                                        "********** CLASIFICACIÓN FINAL DE PILOTOS **********\n" +
+                                        "****************************************************\n" +
+                                        "¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡\n" +
                                         "¡¡¡ Campeonato de pilotos queda desierto por haber sido descalificados todos los pilotos !!!\n" +
                                         "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     showDisqualifiedPilots();
+                    showClasificationTeams();
                 }
                 else{                                   // Si solo queda un piloto sin descalificar, es el ganador.
                     showQualifiedPilots();
                     showDisqualifiedPilots();
+                    showClasificationTeams();
                 }
             }
             getPilotsRace().clear();
@@ -343,10 +345,11 @@ public class Organization {
                 team.sortPilots();
             }
         }
-        //Una vez terminada la competición, se realiza la ceremonia de entrega de premios.
+        // This case is when the final pilots qualified are more than 1.
         if(!notEnoughPilots){
             showQualifiedPilots();
             showDisqualifiedPilots();
+            showClasificationTeams();
         }
     }
 
@@ -425,13 +428,19 @@ public class Organization {
                 System.out.println("@@@ Posición(" + indexPilot + "): " + pilot.getNamePilot() + " - " + pilot.specificResultTrack(nameTrack).toString() + " @@@");
             }
             else{
-                System.out.println("!!! Ha abandonado " + pilot.getNamePilot() + " - " + pilot.specificResultTrack(nameTrack) + " !!!");
+                if(pilot.getDisqualifyPilot()){
+                    System.out.println("!!! Ha abandonado " + pilot.getNamePilot() + " - " + pilot.specificResultTrack(nameTrack) + " - Además ha sido descalificado para el resto del Campeonato !!!");
+                }
+                else{
+                    System.out.println("!!! Ha abandonado " + pilot.getNamePilot() + " - " + pilot.specificResultTrack(nameTrack) + " !!!");
+
+                }
             }
             indexPilot++;
         }
     }
     /*
-        Println in console the list of all pilots that are qualified sorted about their points, in case of equalit about
+        Println in console the list of all pilots that are qualified sorted about their points, in case of equality about
         the total of races finished,in case of equality about the name of the pilot in a descendant way.
      */
     public void showQualifiedPilots() {
@@ -456,7 +465,7 @@ public class Organization {
         }
     }
     /*
-        Println in console the list of all pilots that are disqualified sorted about their points, in case of equalit about
+        Println in console the list of all pilots that are disqualified sorted about their points, in case of equality about
         the total of races finished,in case of equality about the name of the pilot in a descendant way.
      */
     public void showDisqualifiedPilots(){
@@ -474,6 +483,54 @@ public class Organization {
         for(IPilot pilot: disqualifiedPilots){
             pilot.showResult(0);
             System.out.println("");
+        }
+    }
+    /*
+        Println in console the list of all teams that are qualified sorted about their points, in case of equality about
+        the total of races finished,in case of equality about the name of the team in a descendant way.
+     */
+
+    public void showClasificationTeams(){
+        System.out.println("****************************************************\n" +
+                            "******** CLASIFICACIÓN FINAL DE ESCUDERÍAS *********\n" +
+                            "****************************************************");
+        List<Team> teamsQualified = new ArrayList<Team>();
+        List<Team> teamsDisqualified = new ArrayList<Team>();
+        for(Team team: getTeamsOrganization()){
+            if(team.isQualifiedTeamEnd()){
+                teamsQualified.add(team);
+            }
+            else{
+                teamsDisqualified.add(team);
+            }
+        }
+        Collections.sort(teamsQualified, Collections.reverseOrder(new PointsComparatorTeam()));
+        Collections.sort(teamsQualified, Collections.reverseOrder(new PointsComparatorTeam()));
+        int indexPosition = 1;
+
+        if(teamsQualified.size() == 0){
+            System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡\n" +
+                                "¡¡¡ Campeonato de escuderías queda desierto por haber sido descalificados todos los pilotos !!!\n" +
+                                "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        }
+        else{
+            for(Team team: teamsQualified){
+                team.sortPilots();
+                team.sortCars();
+                System.out.println("@@@ Posición(" + indexPosition + ") " + team.getNameTeam() + " con " + team.pointsTeam() + " puntos " + " @@@");
+                System.out.println(team);
+                indexPosition++;
+            }
+        }
+
+        System.out.println("****************************************************\n" +
+                            "************ ESCUDERIAS DESCALIFICADAS *************\n" +
+                            "****************************************************");
+        for(Team team: teamsDisqualified){
+            team.sortPilots();
+            team.sortCars();
+            System.out.println("!!! Escudería descalificada: " + team.getNameTeam() + " con 0 puntos" + " !!!");
+            System.out.println(team);
         }
     }
 }

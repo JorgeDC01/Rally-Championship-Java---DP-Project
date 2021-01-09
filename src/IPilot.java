@@ -21,14 +21,19 @@ public interface IPilot {
     Result specificResultTrack(String track);
     int totalPointsStored();
     int numberRacesCompeted();
+    int numberRacesCompleted();
     boolean canCompetePilot();
     double calculateSkills();
     void drivePilot(ITrack track);
     boolean isConcentrationEnough(ITrack track, double minutesToFinishRace);
     boolean isFuelEnough(ITrack track, double minutesToFinishRace);
+    void notEnoughConcentration(ITrack track, double minutesToFinish);
+    void notEnoughFuel(ITrack track, double minutesToFinish);
+    void enoughConcentrationAndFuel(ITrack track, double minutesToFinish);
     double minutesToFinishRace(ITrack track);
     void storeResult(ITrack track,double time);
     boolean reduceFuelOfCar(double minutesRunning);
     void assignPointsPilot(String nameTrack,int points);
     void showResult(int ranking);
+    boolean checkOrder();
 }
