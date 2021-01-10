@@ -51,4 +51,24 @@ public abstract class TrackDecorator implements ITrack{
         return "Track's name: " + getNameTrack() + ", cond: " + getNoumExtras() + ", Complexity: " + getOriginalComplexity() + ", actual: " + getComplexity() +
                 ", Distance: " + getOriginalDistance() + ", actual: " + getDistance();
     }
+    /*
+        Set the distance of the track on distance.
+        @param distance The distance of track.
+     */
+    public void setOriginalDistance(DistanceTrack distance){
+        this.track.setOriginalDistance(distance);
+    }
+    /*
+        Set the complexity of the track on complexity.
+        @param complexity The complexity of the track.
+     */
+    public void setOriginalComplexity(ComplexityTrack complexity){
+        this.track.setOriginalComplexity(complexity);
+    }
+    /*
+        Set the name of the track.
+     */
+    public void setNameTrack(String nameTrack){
+        this.track.setNameTrack(nameTrack);
+    }
 }

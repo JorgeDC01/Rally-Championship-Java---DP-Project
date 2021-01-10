@@ -44,11 +44,11 @@ public interface ITrack {
         Set the complexity of the track on complexity.
         @param complexity The complexity of the track.
      */
-     public void setOriginalComplexity(ComplexityTrack complexity);
+     void setOriginalComplexity(ComplexityTrack complexity);
      /*
         Set the distance of the track on distance.
         @param distance The distance of track.
      */
-     public void setOriginalDistance(DistanceTrack distance);
+     void setOriginalDistance(DistanceTrack distance);
 }
 
